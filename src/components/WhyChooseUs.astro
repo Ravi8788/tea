@@ -1,0 +1,95 @@
+---
+const features = [
+  {
+    title: 'Authentic Rajasthani Taste',
+    description: 'Traditional spice blends sourced from Rajasthan\'s finest markets, preserving century-old chai recipes.',
+    icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="20" stroke="#C9A227" stroke-width="1.5" fill="none"/>
+      <path d="M24 10 L28 20 L38 20 L30 26 L33 36 L24 30 L15 36 L18 26 L10 20 L20 20 Z" fill="rgba(201,162,39,0.2)" stroke="#C9A227" stroke-width="1"/>
+    </svg>`,
+  },
+  {
+    title: 'Premium Ingredients',
+    description: 'Only the finest organic cardamom, natural jaggery, and hand-picked tea leaves go into every blend.',
+    icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 4 C24 4 10 14 10 26 C10 34 16 42 24 42 C32 42 38 34 38 26 C38 14 24 4 24 4Z" stroke="#C9A227" stroke-width="1.5" fill="rgba(201,162,39,0.1)"/>
+      <path d="M24 16 Q30 22 24 32" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>`,
+  },
+  {
+    title: 'Hygienic Manufacturing',
+    description: 'FSSAI certified facility with state-of-the-art equipment ensuring every pack meets the highest standards.',
+    icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 6 L38 12 L38 26 C38 34 32 40 24 44 C16 40 10 34 10 26 L10 12 Z" stroke="#C9A227" stroke-width="1.5" fill="rgba(201,162,39,0.08)"/>
+      <path d="M17 24 L22 29 L31 19" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`,
+  },
+  {
+    title: 'Instant Preparation',
+    description: 'Ready in 60 seconds. Just add hot water or milk. Perfect consistency every single cup, every single time.',
+    icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="18" stroke="#C9A227" stroke-width="1.5" fill="none"/>
+      <path d="M24 10 L24 24 L32 32" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`,
+  },
+  {
+    title: 'Consistent Quality',
+    description: 'Every batch is lab-tested and verified. You get the same perfect taste whether it\'s your first cup or thousandth.',
+    icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 8 L28 18 L40 18 L31 25 L34 36 L24 30 L14 36 L17 25 L8 18 L20 18 Z" stroke="#C9A227" stroke-width="1.5" fill="rgba(201,162,39,0.12)"/>
+    </svg>`,
+  },
+  {
+    title: 'Pan India Delivery',
+    description: 'From Rajasthan to every corner of India. Reliable logistics with 48-hour express dispatch for partners.',
+    icon: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="24" cy="24" rx="18" ry="18" stroke="#C9A227" stroke-width="1.5" fill="none"/>
+      <ellipse cx="24" cy="24" rx="10" ry="18" stroke="#C9A227" stroke-width="1" fill="none"/>
+      <line x1="6" y1="24" x2="42" y2="24" stroke="#C9A227" stroke-width="1"/>
+      <line x1="12" y1="14" x2="36" y2="14" stroke="#C9A227" stroke-width="1"/>
+      <line x1="12" y1="34" x2="36" y2="34" stroke="#C9A227" stroke-width="1"/>
+    </svg>`,
+  },
+];
+---
+
+<section class="section-py section-soft">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- Heading -->
+    <div class="text-center mb-16 reveal">
+      <p class="label-text text-gold mb-3">Our Promise</p>
+      <h2 class="text-display font-cinzel font-bold text-dark mb-4">
+        Why Choose <span class="text-gold-gradient">Krushnai Amrutulya</span>
+      </h2>
+      <p class="font-playfair italic text-dark/60 text-sub max-w-xl mx-auto">
+        Six pillars of excellence that make us India's most trusted premium tea premix brand
+      </p>
+    </div>
+
+    <!-- Ornament -->
+    <div class="ornament-divider max-w-sm mx-auto mb-16 reveal">
+      <span class="text-gold">✦</span>
+    </div>
+
+    <!-- Feature Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-group">
+      {features.map(feature => (
+        <div class="stagger-child glass-card p-10 opacity-0 group cursor-default">
+          <!-- Icon -->
+          <div class="mb-6 transition-transform duration-300 group-hover:scale-110" set:html={feature.icon}></div>
+
+          <!-- Gold line accent -->
+          <div class="w-8 h-0.5 bg-gold mb-5 transition-all duration-300 group-hover:w-14"></div>
+
+          <!-- Title -->
+          <h3 class="font-cinzel font-semibold text-gold text-lg mb-3 leading-snug">{feature.title}</h3>
+
+          <!-- Description -->
+          <p class="font-poppins text-dark/65 text-sm leading-relaxed">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

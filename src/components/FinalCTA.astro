@@ -1,0 +1,32 @@
+---
+import { company } from '../data/company';
+---
+
+<section id="cta" class="section-py relative overflow-hidden">
+  <!-- Gold gradient background -->
+  <div class="absolute inset-0" style="background: linear-gradient(135deg, #C9A227 0%, #D4AF37 50%, #9B7A1A 100%);"></div>
+  <div class="absolute inset-0 mughal-texture opacity-20"></div>
+  <div class="absolute inset-0" style="background: rgba(13,13,13,0.15);"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center reveal">
+    <p class="label-text mb-4" style="color: rgba(30,30,30,0.7);">Partner With Us</p>
+    <h2 class="text-display font-cinzel font-black mb-6 leading-tight" style="color: var(--dark);">
+      Let's Brew<br>Success Together
+    </h2>
+    <p class="font-playfair italic text-sub max-w-2xl mx-auto mb-10" style="color: rgba(30,30,30,0.75);">
+      Whether you're a hotel, café, distributor, or tea lover — Krushnai Amrutulya
+      has the perfect premix for your business and your cup.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="/contact" class="btn-outline text-xs px-10 py-4">
+        Partner With Us →
+      </a>
+      <a href={company.whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-outline text-xs px-10 py-4" style="border-color: var(--dark); color: var(--dark);">
+        💬 WhatsApp Us
+      </a>
+      <a href="/contact" class="btn-outline text-xs px-10 py-4" style="border-color: var(--dark); color: var(--dark);">
+        Get a Quote
+      </a>
+    </div>
+  </div>
+</section>

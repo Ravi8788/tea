@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================
+   DESIGN TOKEN SYSTEM
+   ===================== */
+:root {
+  --gold: #C9A227;
+  --gold-luxury: #D4AF37;
+  --gold-light: #E8C85A;
+  --gold-dark: #9B7A1A;
+  --gold-shine: #F5E194;
+  --cream: #FAF8F3;
+  --cream-dark: #F0EBE0;
+  --dark: #1E1E1E;
+  --dark-rich: #0D0D0D;
+  --dark-warm: #2A2218;
+  --accent: #7A5C1E;
+
+  /* Light theme surfaces */
+  --page-bg: #FFFFFF;
+  --page-bg-soft: #FAF8F3;
+  --page-bg-warm: #F5F0E8;
+  --text-primary: #1E1E1E;
+  --text-muted: rgba(30, 30, 30, 0.65);
+  --text-subtle: rgba(30, 30, 30, 0.45);
+
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(201, 162, 39, 0.22);
+  --glass-blur: blur(20px);
+
+  --shadow-gold: 0 0 40px rgba(201, 162, 39, 0.25);
+  --shadow-luxury: 0 20px 50px rgba(201, 162, 39, 0.12);
+  --shadow-card: 0 8px 32px rgba(30, 30, 30, 0.08);
+
+  --gradient-gold: linear-gradient(135deg, #C9A227 0%, #D4AF37 50%, #9B7A1A 100%);
+  --gradient-royal: linear-gradient(180deg, #FFFFFF 0%, #FAF8F3 55%, #F5F0E8 100%);
+  --gradient-gold-soft: linear-gradient(135deg, #FAF8F3 0%, #FFFFFF 50%, #F5F0E8 100%);
+
+  --section-py: clamp(5rem, 10vh, 9rem);
+}
+
+/* =====================
+   BASE RESET
+   ===================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles this */
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--page-bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =====================
+   TYPOGRAPHY SYSTEM
+   ===================== */
+.font-cinzel           { font-family: 'Cinzel', serif; }
+.font-cinzel-deco      { font-family: 'Cinzel Decorative', serif; }
+.font-playfair         { font-family: 'Playfair Display', serif; }
+
+.text-hero     { font-size: clamp(2.8rem, 7vw, 6.5rem); line-height: 1.1; }
+.text-display  { font-size: clamp(2rem, 4.5vw, 4rem); line-height: 1.15; }
+.text-heading  { font-size: clamp(1.5rem, 2.8vw, 2.4rem); line-height: 1.2; }
+.text-sub      { font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.6; }
+.label-text    { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; }
+
+/* =====================
+   GOLD TEXT GRADIENT
+   ===================== */
+.text-gold-gradient {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =====================
+   LUXURY BUTTON SYSTEM
+   ===================== */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  background: var(--gradient-gold);
+  color: #1E1E1E;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: translateX(-150%) skewX(-15deg);
+  transition: none;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-gold:hover::after {
+  animation: shine 0.65s ease forwards;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 36px;
+  background: transparent;
+  color: var(--gold);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1.5px solid var(--gold);
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.btn-outline:hover {
+  background: var(--gold);
+  color: #1E1E1E;
+}
+
+/* =====================
+   GLASSMORPHISM CARD
+   ===================== */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(201, 162, 39, 0.45);
+  background: rgba(255, 255, 255, 0.98);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(201, 162, 39, 0.12);
+}
+
+/* =====================
+   ORNAMENTAL DIVIDER
+   ===================== */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--gold);
+}
+
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* =====================
+   REVEAL ANIMATIONS
+   (controlled by GSAP)
+   ===================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+/* =====================
+   SECTION SPACING
+   ===================== */
+.section-py {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+}
+
+/* =====================
+   MUGHAL PATTERN BG
+   (SVG repeat texture)
+   ===================== */
+.mughal-texture {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A227' fill-opacity='0.06'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z M30 10 L50 30 L30 50 L10 30 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.section-light { background: var(--page-bg); }
+.section-soft { background: var(--page-bg-soft); }
+.section-warm { background: var(--page-bg-warm); }
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  background: #FFFFFF;
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.12);
+}
+
+/* =====================
+   SCROLLBAR
+   ===================== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--page-bg-soft); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* =====================
+   LOADING SCREEN
+   ===================== */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--page-bg);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#loading-bar-track {
+  width: 200px;
+  height: 2px;
+  background: rgba(201,162,39,0.2);
+}
+
+#loading-bar-fill {
+  height: 100%;
+  background: var(--gradient-gold);
+  width: 0%;
+  transition: width 1.4s ease;
+}
+
+.loading-logo {
+  width: min(92vw, 420px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 20px rgba(201, 162, 39, 0.2));
+}
+
+.footer-logo {
+  width: min(100%, 280px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.15));
+}

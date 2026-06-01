@@ -1,0 +1,46 @@
+---
+import { company } from '../data/company';
+import { productImageFallback } from '../data/products';
+
+interface Props {
+	src: string;
+	alt: string;
+	class?: string;
+	width?: number;
+	height?: number;
+	loading?: 'lazy' | 'eager';
+}
+
+const {
+	src,
+	alt,
+	class: className = '',
+	width = 320,
+	height = 320,
+	loading = 'lazy',
+} = Astro.props;
+
+const fallback = productImageFallback(src);
+---
+
+<img
+	src={src}
+	alt={alt}
+	class={`product-img ${className}`}
+	width={width}
+	height={height}
+	loading={loading}
+	decoding="async"
+	onerror={`this.onerror=null;this.src='${fallback}'`}
+/>
+
+<style>
+	.product-img {
+		background: transparent;
+		object-fit: contain;
+		object-position: center;
+		/* Crop thin yellow edge strips from pack mockup exports */
+		transform: scale(1.08);
+		transform-origin: center center;
+	}
+</style>

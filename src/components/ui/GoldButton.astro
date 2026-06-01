@@ -1,0 +1,49 @@
+---
+interface Props {
+	href: string;
+	label: string;
+	variant?: 'primary' | 'outline' | 'ghost';
+	size?: 'sm' | 'md' | 'lg';
+	class?: string;
+	external?: boolean;
+}
+
+const {
+	href,
+	label,
+	variant = 'primary',
+	size = 'md',
+	class: className = '',
+	external = false,
+} = Astro.props;
+
+const variants = {
+	primary:
+		'bg-gradient-gold text-gold-dark font-semibold hover:shadow-lg hover:shadow-gold/30 hover:-translate-y-0.5',
+	outline:
+		'border-2 border-gold text-gold bg-transparent hover:bg-gold hover:text-gold-dark',
+	ghost: 'text-gold hover:text-gold-light underline-offset-4 hover:underline',
+};
+
+const sizes = {
+	sm: 'px-5 py-2 text-xs tracking-widest',
+	md: 'px-8 py-3 text-sm tracking-widest',
+	lg: 'px-10 py-4 text-sm tracking-[0.2em]',
+};
+---
+
+<a
+	href={href}
+	class:list={[
+		'inline-block rounded-sm uppercase transition-all duration-300',
+		variants[variant],
+		sizes[size],
+		className,
+	]}
+	target={external ? '_blank' : undefined}
+	rel={external ? 'noopener noreferrer' : undefined}
+>
+	{label}
+</a>
+
+

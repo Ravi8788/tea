@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750">
+  <rect width="600" height="750" fill="#4A0E0E"/>
+  <circle cx="300" cy="220" r="120" fill="#6B1A1A"/>
+  <ellipse cx="300" cy="480" rx="180" ry="200" fill="#5A1515"/>
+  <rect x="180" y="680" width="240" height="70" fill="#3D1212"/>
+  <text x="300" y="730" text-anchor="middle" fill="#C9A227" font-family="serif" font-size="18">Founder</text>
+</svg>

@@ -1,0 +1,48 @@
+---
+const stats = [
+  { number: 500, suffix: '+', label: 'Happy Customers' },
+  { number: 50, suffix: '+', label: 'Business Partners' },
+  { number: 28, suffix: '+', label: 'States Served' },
+  { number: 100, suffix: '%', label: 'Quality Commitment' },
+];
+---
+
+<section class="section-py mughal-texture section-warm">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- Heading -->
+    <div class="text-center mb-16 reveal">
+      <p class="label-text text-gold mb-3">Our Reach</p>
+      <h2 class="text-display font-cinzel font-bold text-dark">
+        Numbers That <span class="text-gold-gradient">Define Us</span>
+      </h2>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 stagger-group">
+      {stats.map(stat => (
+        <div class="stagger-child text-center opacity-0">
+          <div class="glass-card p-8 flex flex-col items-center gap-4">
+
+            <!-- Number -->
+            <span
+              class="stat-number font-cinzel font-black text-gold leading-none"
+              style="font-size: clamp(3rem, 6vw, 5rem);"
+              data-target={stat.number}
+              data-suffix={stat.suffix}
+            >
+              0{stat.suffix}
+            </span>
+
+            <!-- Gold line -->
+            <div class="w-10 h-px bg-gold opacity-60"></div>
+
+            <!-- Label -->
+            <p class="font-cinzel text-dark/75 text-sm tracking-wider uppercase">{stat.label}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,22 @@
+{
+  "name": "Krushnai Amrutulya",
+  "short_name": "Krushnai",
+  "description": "Premium jaggery tea premix from Rajasthan, India",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#C9A227",
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo-header.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

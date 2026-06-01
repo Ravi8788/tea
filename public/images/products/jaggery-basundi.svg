@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#F5F0E8"/>
+  <rect x="120" y="80" width="160" height="220" rx="8" fill="#4A0E0E"/>
+  <rect x="130" y="90" width="140" height="80" fill="#C9A227" opacity="0.2"/>
+  <text x="200" y="125" text-anchor="middle" fill="#C9A227" font-family="serif" font-size="12">Basundi</text>
+  <text x="200" y="145" text-anchor="middle" fill="#C9A227" font-family="serif" font-size="12">Jaggery</text>
+  <ellipse cx="200" cy="210" rx="55" ry="35" fill="#E8C547" opacity="0.5"/>
+  <text x="200" y="340" text-anchor="middle" fill="#4A0E0E" font-family="serif" font-size="14">Jaggery Basundi</text>
+</svg>

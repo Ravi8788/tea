@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { products, getProduct } from '../../data/products';
+import { company } from '../../data/company';
+import ProductImage from '../../components/ProductImage.astro';
+import { productSeo } from '../../data/seo';
+import {
+  breadcrumbSchema,
+  organizationSchema,
+  productSchema,
+} from '../../lib/seo';
+
+export function getStaticPaths() {
+  return products.map((product) => ({ params: { slug: product.slug } }));
+}
+
+const { slug } = Astro.params;
+const product = getProduct(slug!);
+if (!product) return Astro.redirect('/products');
+
+const others = products.filter(p => p.slug !== slug);
+const seo = productSeo(product.name, product.description, product.slug);
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  ogImage={product.image}
+  ogType="product"
+  canonicalPath={`/products/${product.slug}/`}
+  schema={[
+    organizationSchema(),
+    productSchema(product),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Products', path: '/products/' },
+      { name: product.name, path: `/products/${product.slug}/` },
+    ]),
+  ]}
+>
+  <Header />
+  <main>
+
+    <!-- Breadcrumb + Hero -->
+    <section class="pt-28 pb-12 section-soft">
+      <div class="max-w-7xl mx-auto px-6">
+        <nav class="font-poppins text-xs mb-8 reveal text-dark/45" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-gold transition-colors">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/products" class="hover:text-gold transition-colors">Products</a>
+          <span class="mx-2">/</span>
+          <span style="color: #C9A227;">{product.name}</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <!-- Product Image -->
+          <div class="reveal-left">
+            <div class="glass-card overflow-hidden border relative" style="border-color: rgba(201,162,39,0.2); aspect-ratio: 4/5;">
+              <ProductImage
+                src={product.image}
+                alt={product.name}
+                class="w-full h-full object-contain"
+                width={600}
+                height={750}
+                loading="eager"
+              />
+              <span class="absolute top-4 right-0 z-10 font-poppins font-semibold text-white text-xs uppercase tracking-wider px-4 py-2 product-badge">
+                {product.badge}
+              </span>
+            </div>
+          </div>
+
+          <!-- Product Info -->
+          <div class="reveal">
+            <p class="label-text text-gold mb-3">{product.badge} · {product.tagline}</p>
+            <h1 class="text-heading font-cinzel font-bold text-dark mb-6 uppercase">{product.name}</h1>
+            <div class="ornament-divider max-w-xs mb-8"><span class="text-gold">✦</span></div>
+            <p class="font-poppins text-dark/70 leading-relaxed mb-8">{product.longDescription}</p>
+
+            <!-- Highlights -->
+            <ul class="space-y-3 mb-8">
+              {product.highlights.map(h => (
+                <li class="flex items-center gap-3 font-poppins text-sm text-dark/65">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" class="flex-shrink-0">
+                    <circle cx="10" cy="10" r="9" stroke="#C9A227" stroke-width="1.5"/>
+                    <path d="M6 10 L9 13 L14 7" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  {h}
+                </li>
+              ))}
+            </ul>
+
+            <p class="font-poppins text-sm mb-8 text-dark/45">
+              Available sizes: <span class="text-gold">{product.weight}</span>
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="/contact" class="btn-gold text-xs px-8 py-3.5">Enquiry →</a>
+              <a href={company.whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-outline text-xs px-8 py-3.5">💬 WhatsApp Order</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Details -->
+    <section class="section-py section-light">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="reveal glass-card p-8">
+            <h2 class="font-cinzel font-semibold text-gold text-lg mb-4">Ingredients</h2>
+            <ul class="space-y-2">
+              {product.ingredients.map(ing => (
+                <li class="font-poppins text-dark/60 text-sm flex items-center gap-2">
+                  <span style="color: #C9A227;">·</span>{ing}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="reveal glass-card p-8">
+            <h2 class="font-cinzel font-semibold text-gold text-lg mb-4">How to Prepare</h2>
+            <p class="font-poppins text-dark/60 text-sm leading-relaxed">{product.preparation}</p>
+          </div>
+          <div class="reveal glass-card p-8">
+            <h2 class="font-cinzel font-semibold text-gold text-lg mb-4">Ideal For</h2>
+            <ul class="space-y-2">
+              {product.idealFor.map(use => (
+                <li class="font-poppins text-dark/60 text-sm flex items-center gap-2">
+                  <span style="color: #C9A227;">✦</span>{use}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Products -->
+    {others.length > 0 && (
+      <section class="section-py section-warm">
+        <div class="max-w-7xl mx-auto px-6">
+          <h2 class="text-heading font-cinzel font-bold text-dark mb-10 reveal">
+            More From Our <span class="text-gold-gradient">Collection</span>
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {others.map(p => (
+              <a href={`/products/${p.slug}`} class="reveal group glass-card overflow-hidden">
+                <div class="aspect-video overflow-hidden">
+                  <ProductImage src={p.image} alt={p.name} class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" width={320} height={240} loading="lazy" />
+                </div>
+                <div class="p-5">
+                  <p class="font-cinzel font-semibold text-gold text-sm group-hover:text-gold-light transition-colors">{p.name}</p>
+                  <p class="font-poppins text-dark/45 text-xs mt-1">{p.tagline}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .product-badge {
+    background: linear-gradient(135deg, #C9A227, #D4AF37);
+    clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+    box-shadow: 0 2px 10px rgba(201, 162, 39, 0.45);
+  }
+</style>

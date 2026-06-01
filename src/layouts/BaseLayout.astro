@@ -1,0 +1,115 @@
+---
+import '../styles/global.css';
+import { company } from '../data/company';
+import {
+	absoluteUrl,
+	defaultKeywords,
+	pageUrl,
+} from '../lib/seo';
+
+export interface Props {
+	title?: string;
+	description?: string;
+	keywords?: string;
+	ogImage?: string;
+	ogType?: string;
+	canonicalPath?: string;
+	noindex?: boolean;
+	schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+	title = 'Krushnai Amrutulya | Premium Tea Premix from Rajasthan',
+	description = 'Krushnai Amrutulya crafts premium Rajasthani tea premixes. Jaggery Cardamom, Rose Tea & more. For hotels, restaurants, cafes. Pan India delivery.',
+	keywords = defaultKeywords,
+	ogImage = '/og-image.jpg',
+	ogType = 'website',
+	canonicalPath,
+	noindex = false,
+	schema,
+} = Astro.props;
+
+const canonical = pageUrl(canonicalPath ?? Astro.url.pathname);
+const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : absoluteUrl(ogImage);
+const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+
+const schemaBlocks = schema
+	? Array.isArray(schema) ? schema : [schema]
+	: [];
+---
+
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content={description} />
+	<meta name="keywords" content={keywords} />
+	<meta name="author" content={company.name} />
+	<meta name="robots" content={robotsContent} />
+	<meta name="googlebot" content={robotsContent} />
+	<meta name="theme-color" content="#C9A227" />
+	<meta name="format-detection" content="telephone=yes" />
+
+	<!-- Geo / Local SEO -->
+	<meta name="geo.region" content="IN-RJ" />
+	<meta name="geo.placename" content="Sojat, Pali, Rajasthan" />
+	<meta name="geo.position" content="25.9234;73.6667" />
+	<meta name="ICBM" content="25.9234, 73.6667" />
+
+	<link rel="canonical" href={canonical} />
+	<link rel="sitemap" type="application/xml" href="/sitemap.xml" title="Sitemap" />
+
+	<!-- Open Graph -->
+	<meta property="og:site_name" content={company.brand} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:url" content={canonical} />
+	<meta property="og:image" content={ogImageAbsolute} />
+	<meta property="og:image:alt" content={`${company.brand} — Premium Jaggery Tea Premix`} />
+	<meta property="og:type" content={ogType} />
+	<meta property="og:locale" content="en_IN" />
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={ogImageAbsolute} />
+	<meta name="twitter:image:alt" content={`${company.brand} — Premium Jaggery Tea Premix`} />
+
+	{schemaBlocks.map((block) => (
+		<script type="application/ld+json" set:html={JSON.stringify(block)} />
+	))}
+
+	<link rel="icon" type="image/png" href="/images/logo-header.png" />
+	<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+	<link rel="manifest" href="/site.webmanifest" />
+	<title>{title}</title>
+</head>
+<body>
+
+	<!-- Loading Screen -->
+	<div id="loading-screen" aria-hidden="true">
+		<img
+			src="/images/logo-header.png"
+			alt="Krushnai Amrutulya logo — Premium Jaggery Tea Premix"
+			class="loading-logo"
+			width="420"
+			height="178"
+			loading="eager"
+			decoding="async"
+		/>
+		<div id="loading-bar-track">
+			<div id="loading-bar-fill"></div>
+		</div>
+		<p class="label-text text-gold opacity-60">Crafting Royal Experience...</p>
+	</div>
+
+	<slot />
+
+	<script>
+		import '../scripts/smooth-scroll.js';
+		import '../scripts/gsap-init.js';
+	</script>
+</body>
+</html>

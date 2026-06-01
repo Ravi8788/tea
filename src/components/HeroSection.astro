@@ -1,0 +1,349 @@
+---
+import { products } from '../data/products';
+import { company } from '../data/company';
+import ProductImage from './ProductImage.astro';
+---
+
+<section class="home-hero">
+	<div class="home-hero-bg" aria-hidden="true"></div>
+	<div class="home-hero-pattern mughal-texture" aria-hidden="true"></div>
+	<div class="home-hero-glow" aria-hidden="true"></div>
+
+	<div class="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-20 lg:pt-32 lg:pb-24 w-full">
+		<!-- Brand strip (static — not repeated per slide) -->
+		<div class="home-hero-brand text-center lg:text-left mb-8 lg:mb-10 opacity-0">
+			<p class="label-text text-gold mb-2 tracking-[0.25em]">{company.brand.toUpperCase()}</p>
+			<p class="font-poppins text-sm text-dark/55">
+				4 Premium Variants · FSSAI Certified · Pan India Delivery
+			</p>
+		</div>
+
+		<div class="swiper home-hero-swiper opacity-0">
+			<div class="swiper-wrapper">
+				{products.map((product, index) => (
+					<div class="swiper-slide">
+						<div class="home-hero-slide grid grid-cols-1 items-center">
+							<div class="home-hero-slide-copy order-2 lg:order-1 text-center lg:text-left">
+								<span class={`home-hero-badge home-hero-badge--${product.badgeVariant}`}>
+									{product.badge}
+								</span>
+								{index === 0 ? (
+									<h1 class="font-cinzel font-bold text-dark text-2xl sm:text-3xl lg:text-4xl leading-snug mb-3 mt-4">
+										{product.name}
+									</h1>
+								) : (
+									<h2 class="font-cinzel font-bold text-dark text-2xl sm:text-3xl lg:text-4xl leading-snug mb-3 mt-4">
+										{product.name}
+									</h2>
+								)}
+								<p class="font-playfair italic text-gold/90 text-sm mb-4">{product.tagline}</p>
+								<p class="font-poppins text-sm text-dark/70 leading-relaxed mb-5 max-w-lg mx-auto lg:mx-0 line-clamp-3 lg:line-clamp-none">
+									{product.description}
+								</p>
+								<ul class="grid grid-cols-2 gap-x-3 gap-y-1.5 mb-6 max-w-md mx-auto lg:mx-0 text-left">
+									{product.highlights.map((h) => (
+										<li class="flex items-start gap-2 font-poppins text-xs text-dark/80">
+											<span class="text-gold flex-shrink-0">✦</span>
+											{h}
+										</li>
+									))}
+								</ul>
+								<div class="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3">
+									<a href={`/products/${product.slug}`} class="btn-gold text-xs px-8 py-3.5 w-full sm:w-auto text-center">
+										View Product →
+									</a>
+									<a href="/products" class="btn-outline text-xs px-8 py-3.5 w-full sm:w-auto text-center">
+										All Products
+									</a>
+								</div>
+							</div>
+
+							<div class="home-hero-slide-visual order-1 lg:order-2">
+								<a href={`/products/${product.slug}`} class="home-hero-image-frame block">
+									<ProductImage
+										src={product.image}
+										alt={product.name}
+										class="home-hero-product-img w-full h-full object-contain"
+										width={720}
+										height={480}
+										loading={index === 0 ? 'eager' : 'lazy'}
+									/>
+								</a>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<div class="home-hero-controls flex flex-col sm:flex-row items-center justify-between gap-6 mt-10 lg:mt-12">
+				<div class="home-hero-pagination flex flex-wrap justify-center gap-2"></div>
+				<div class="flex items-center gap-3">
+					<button type="button" class="home-hero-prev" aria-label="Previous product">←</button>
+					<button type="button" class="home-hero-next" aria-label="Next product">→</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<span class="home-hero-side hidden lg:block">SINCE 2023 · RAJASTHAN · INDIA</span>
+
+	<div class="home-hero-scroll opacity-0">
+		<span class="label-text text-gold/45 text-[10px]">Scroll to Discover</span>
+		<div class="home-hero-scroll-line"></div>
+	</div>
+</section>
+
+<script>
+	import Swiper from 'swiper';
+	import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
+	import 'swiper/css';
+	import 'swiper/css/pagination';
+	import 'swiper/css/effect-fade';
+	import { onAppReady } from '../scripts/ready.js';
+
+	function initHomeHeroSwiper() {
+		const el = document.querySelector('.home-hero-swiper');
+		if (!el || el.dataset.swiperInit === 'true') return;
+
+		const swiper = new Swiper(el, {
+			modules: [Autoplay, Pagination, Navigation, EffectFade],
+			effect: 'fade',
+			fadeEffect: { crossFade: true },
+			slidesPerView: 1,
+			loop: true,
+			speed: 900,
+			allowTouchMove: true,
+			autoplay: {
+				delay: 4000,
+				disableOnInteraction: false,
+				pauseOnMouseEnter: false,
+			},
+			pagination: {
+				el: '.home-hero-pagination',
+				clickable: true,
+				renderBullet: (index, className) => {
+					const names = ['Jaggery Cardamom', 'Sugar Cardamom', 'Rose Tea', 'Jaggery Basundi'];
+					return `<button type="button" class="${className} home-hero-dot" aria-label="${names[index] ?? 'Product'}">${names[index] ?? ''}</button>`;
+				},
+			},
+			navigation: { nextEl: '.home-hero-next', prevEl: '.home-hero-prev' },
+			on: {
+				init(sw) {
+					el.dataset.swiperInit = 'true';
+					sw.autoplay.start();
+				},
+			},
+		});
+
+		document.addEventListener('visibilitychange', () => {
+			if (!document.hidden) swiper.autoplay.start();
+		});
+	}
+
+	onAppReady(() => {
+		setTimeout(initHomeHeroSwiper, 300);
+	});
+</script>
+
+<script>
+	import '../scripts/hero-animations.js';
+</script>
+
+<style>
+	.home-hero {
+		position: relative;
+		min-height: 100svh;
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+	}
+
+	.home-hero-bg {
+		position: absolute;
+		inset: 0;
+		background: var(--gradient-gold-soft);
+	}
+
+	.home-hero-pattern {
+		position: absolute;
+		inset: 0;
+		opacity: 0.35;
+	}
+
+	.home-hero-glow {
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(ellipse 55% 45% at 75% 45%, rgba(201, 162, 39, 0.14), transparent 70%);
+		pointer-events: none;
+	}
+
+	.home-hero-slide {
+		min-height: min(560px, calc(100svh - 200px));
+		gap: 1.5rem;
+	}
+
+	@media (min-width: 1024px) {
+		.home-hero-slide {
+			grid-template-columns: minmax(0, 38%) minmax(0, 62%);
+			gap: 2rem 3rem;
+			min-height: min(640px, calc(100svh - 180px));
+		}
+	}
+
+	.home-hero-slide-visual {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.home-hero-image-frame {
+		width: 100%;
+		max-width: 100%;
+		height: min(420px, 48vh);
+		min-height: 280px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: transparent;
+		border: none;
+		box-shadow: 0 20px 50px rgba(201, 162, 39, 0.15);
+		transition: box-shadow 0.35s ease;
+		overflow: hidden;
+	}
+
+	@media (min-width: 640px) {
+		.home-hero-image-frame {
+			height: min(520px, 58vh);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.home-hero-image-frame {
+			height: min(680px, 72vh);
+			max-width: none;
+		}
+	}
+
+	.home-hero-product-img {
+		width: 100%;
+		height: 100%;
+		max-height: 100%;
+		padding: 0;
+		object-fit: contain;
+		object-position: center;
+	}
+
+	.home-hero-image-frame:hover {
+		box-shadow: 0 28px 60px rgba(201, 162, 39, 0.22);
+	}
+
+	.home-hero-badge {
+		display: inline-block;
+		font-family: 'Poppins', sans-serif;
+		font-weight: 600;
+		font-size: 9px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		padding: 6px 12px;
+	}
+
+	.home-hero-badge--est-seller {
+		background: #1a3a2a;
+		color: #faf8f3;
+	}
+
+	.home-hero-badge--customer-favorite {
+		background: #c9a227;
+		color: #1e1e1e;
+	}
+
+	.home-hero-badge--premium-blend {
+		background: #c4848e;
+		color: #1e1e1e;
+	}
+
+	.home-hero-badge--signature {
+		background: #3d2914;
+		color: #c9a227;
+	}
+
+	.home-hero-side {
+		position: absolute;
+		right: 24px;
+		top: 50%;
+		transform: translateY(-50%) rotate(90deg);
+		font-size: 0.65rem;
+		letter-spacing: 0.3em;
+		color: rgba(201, 162, 39, 0.4);
+		font-family: 'Poppins', sans-serif;
+		font-weight: 500;
+		white-space: nowrap;
+	}
+
+	.home-hero-scroll {
+		position: absolute;
+		bottom: 24px;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.home-hero-scroll-line {
+		width: 1px;
+		height: 40px;
+		background: linear-gradient(180deg, #c9a227, transparent);
+		animation: homeScrollPulse 2s ease-in-out infinite;
+	}
+
+	@keyframes homeScrollPulse {
+		0%, 100% { opacity: 0.5; transform: scaleY(1); }
+		50% { opacity: 1; transform: scaleY(1.1); }
+	}
+
+	.home-hero-prev,
+	.home-hero-next {
+		width: 44px;
+		height: 44px;
+		border: 1px solid rgba(201, 162, 39, 0.45);
+		background: rgba(201, 162, 39, 0.08);
+		color: #c9a227;
+		font-size: 1.1rem;
+		cursor: pointer;
+		transition: background 0.3s ease, border-color 0.3s ease;
+	}
+
+	.home-hero-prev:hover,
+	.home-hero-next:hover {
+		background: rgba(201, 162, 39, 0.2);
+		border-color: #c9a227;
+	}
+
+	.home-hero-swiper :global(.home-hero-dot) {
+		font-family: 'Poppins', sans-serif;
+		font-size: 10px;
+		font-weight: 500;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		padding: 8px 14px;
+		border: 1px solid rgba(201, 162, 39, 0.25);
+		background: transparent;
+		color: rgba(30, 30, 30, 0.55);
+		cursor: pointer;
+		transition: all 0.3s ease;
+		width: auto;
+		height: auto;
+		border-radius: 0;
+		opacity: 1;
+	}
+
+	.home-hero-swiper :global(.home-hero-dot.swiper-pagination-bullet-active) {
+		background: rgba(201, 162, 39, 0.15);
+		border-color: #c9a227;
+		color: #c9a227;
+	}
+</style>

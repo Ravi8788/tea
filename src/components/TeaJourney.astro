@@ -1,0 +1,63 @@
+---
+const steps = [
+  { number: '01', title: 'Sourcing', desc: 'Premium Assam tea leaves and organic jaggery sourced from trusted Rajasthani farms and suppliers.' },
+  { number: '02', title: 'Cleaning', desc: 'Raw ingredients thoroughly cleaned and inspected to remove impurities before processing begins.' },
+  { number: '03', title: 'Blending', desc: 'Master blenders combine cardamom, spices, and tea in precise heritage ratios for each variant.' },
+  { number: '04', title: 'Roasting', desc: 'Slow-roasted in traditional vessels to unlock deep, complex flavours and aromatic richness.' },
+  { number: '05', title: 'Quality Testing', desc: 'Every batch lab-tested for taste, aroma, purity, and FSSAI compliance before approval.' },
+  { number: '06', title: 'Packaging', desc: 'Sealed in premium airtight packs with elegant branding to preserve freshness and shelf life.' },
+  { number: '07', title: 'Dispatch', desc: 'Orders packed and dispatched within 48 hours to dealers and partners across India.' },
+];
+---
+
+<section id="journey" class="journey-section section-py overflow-hidden section-soft">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-16 reveal">
+      <p class="label-text text-gold mb-3">From Leaf to Cup</p>
+      <h2 class="text-display font-cinzel font-bold text-dark">
+        The Tea <span class="text-gold-gradient">Journey</span>
+      </h2>
+      <p class="font-playfair italic text-dark/55 text-sub max-w-xl mx-auto mt-4">
+        Seven meticulous steps from Rajasthan's finest ingredients to your perfect cup
+      </p>
+    </div>
+
+    <div class="relative">
+      <!-- Animated line (desktop) -->
+      <div class="journey-line hidden lg:block absolute top-8 left-0 right-0 h-px origin-left" style="background: #C9A227; opacity: 0.4;"></div>
+
+      <!-- Steps grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-8 lg:gap-4">
+        {steps.map((step, i) => (
+          <div class="reveal relative text-center group stagger-child" style={`transition-delay: ${i * 0.05}s`}>
+            <div
+              class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full border-2 z-10 relative transition-all duration-300 group-hover:scale-110"
+              style="border-color: #C9A227; background: #FFFFFF;"
+            >
+              <span class="font-cinzel font-bold text-sm" style="color: #C9A227;">{step.number}</span>
+            </div>
+            <h3 class="font-cinzel font-semibold text-sm mb-2" style="color: #D4AF37;">{step.title}</h3>
+            <p class="font-poppins text-dark/55 text-xs leading-relaxed hidden lg:block">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Mobile: vertical list -->
+      <div class="lg:hidden mt-10 space-y-6 stagger-group">
+        {steps.map(step => (
+          <div class="stagger-child opacity-0 flex gap-4 items-start">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full border flex items-center justify-center" style="border-color: #C9A227;">
+              <span class="font-cinzel text-xs" style="color: #C9A227;">{step.number}</span>
+            </div>
+            <div>
+              <h3 class="font-cinzel font-semibold text-gold text-sm mb-1">{step.title}</h3>
+              <p class="font-poppins text-dark/55 text-xs leading-relaxed">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>

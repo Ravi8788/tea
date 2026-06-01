@@ -1,0 +1,1597 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { products } from '../data/products';
+import { company } from '../data/company';
+import ProductImage from '../components/ProductImage.astro';
+import {
+	productsPageHero,
+	productsPageHeritage,
+	productsCollection,
+	productsCustomerTrust,
+	productsFinestIngredients,
+	productsBenefits,
+	productsPreparation,
+	productsIdealFor,
+	productsDealer,
+	productsFinalCta,
+} from '../data/productsPage';
+import { seoPages } from '../data/seo';
+import {
+	breadcrumbSchema,
+	itemListSchema,
+	organizationSchema,
+} from '../lib/seo';
+
+const heroCollage = [
+	{ slug: 'jaggery-cardamom', label: 'Jaggery Cardamom', position: 'tl' },
+	{ slug: 'sugar-cardamom', label: 'Sugar Cardamom', position: 'tr' },
+	{ slug: 'rose-tea', label: 'Rose Tea', position: 'bl' },
+	{ slug: 'jaggery-basundi', label: 'Jaggery Basundi', position: 'br' },
+] as const;
+
+const collageProducts = heroCollage.map((item) => {
+	const p = products.find((x) => x.slug === item.slug)!;
+	return { ...item, src: p.image, alt: p.name };
+});
+
+const heritageMain = products.find((p) => p.slug === 'jaggery-cardamom')!;
+const heritageOverlap = products.find((p) => p.slug === 'rose-tea')!;
+const whatsappUrl = company.whatsappUrl;
+---
+
+<BaseLayout
+	title={seoPages.products.title}
+	description={seoPages.products.description}
+	keywords={seoPages.products.keywords}
+	canonicalPath="/products/"
+	schema={[
+		organizationSchema(),
+		itemListSchema(products),
+		breadcrumbSchema([
+			{ name: 'Home', path: '/' },
+			{ name: 'Products', path: '/products/' },
+		]),
+	]}
+>
+	<Header />
+	<main class="products-page overflow-x-hidden">
+
+		<!-- §1 HERO -->
+		<section class="products-hero relative flex items-center overflow-hidden">
+			<div class="products-hero-bg absolute inset-0" aria-hidden="true"></div>
+			<div class="products-hero-pattern absolute inset-0" aria-hidden="true"></div>
+			<div class="absolute inset-0 products-hero-glow pointer-events-none" aria-hidden="true"></div>
+
+			<div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-28 lg:py-32">
+				<div class="products-hero-grid">
+					<!-- LEFT: copy -->
+					<div class="products-hero-copy">
+						<div class="ph-hero-label-bar">
+							<span>{productsPageHero.label}</span>
+						</div>
+
+						<h1 class="products-hero-title font-cinzel font-black text-dark uppercase leading-[1.05] mb-6">
+							<span class="block">
+								<span class="ph-hero-word">Crafted</span>
+								<span class="ph-hero-word">For</span>
+							</span>
+							<span class="block">
+								<span class="ph-hero-word ph-hero-word--gold">Rich</span>
+								<span class="ph-hero-word ph-hero-word--gold">Taste,</span>
+							</span>
+							<span class="block">
+								<span class="ph-hero-word">Convenience</span>
+								<span class="ph-hero-word">&</span>
+							</span>
+							<span class="block">
+								<span class="ph-hero-word">Consistency</span>
+							</span>
+						</h1>
+
+						<p class="ph-hero-sub font-poppins font-medium text-gold uppercase mb-6">
+							{productsPageHero.subline}
+						</p>
+
+						<p class="ph-hero-body font-poppins text-sm md:text-base leading-[1.75] max-w-lg mb-10">
+							{productsPageHero.body}
+						</p>
+
+						<div class="ph-hero-btns flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+							<a href="#collection" class="btn-gold text-xs px-10 py-4 justify-center">
+								{productsPageHero.ctaExplore}
+							</a>
+							<a href="/contact" class="btn-outline text-xs px-10 py-4 justify-center">
+								{productsPageHero.ctaEnquiry}
+							</a>
+						</div>
+					</div>
+
+					<!-- RIGHT: collage -->
+					<div class="products-hero-collage" aria-hidden="false">
+						{collageProducts.map((item, i) => (
+							<a
+								href={`/products/${item.slug}`}
+								class={`ph-card ph-card--${item.position}`}
+							>
+								<div class="ph-card-inner ph-card-float ph-card-float--${i + 1}">
+									<ProductImage
+										src={item.src}
+										alt={item.alt}
+										class="ph-card-img"
+										width={280}
+										height={340}
+										loading={i < 2 ? 'eager' : 'lazy'}
+									/>
+									<span class="ph-card-label">{item.label}</span>
+								</div>
+							</a>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<script>
+			import '../scripts/products-hero-animations.js';
+		</script>
+
+		<!-- §2 HERITAGE -->
+		<section class="heritage-section section-py" style="background: #FAF8F3;">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="heritage-grid">
+					<div class="heritage-visual reveal-left">
+						<div class="heritage-visual-glow" aria-hidden="true"></div>
+						<div class="heritage-frame heritage-frame--main">
+							<ProductImage
+								src={heritageMain.image}
+								alt={heritageMain.name}
+								class="w-full h-full object-contain"
+								width={480}
+								height={560}
+								loading="lazy"
+							/>
+						</div>
+						<div class="heritage-frame heritage-frame--overlap">
+							<ProductImage
+								src={heritageOverlap.image}
+								alt={heritageOverlap.name}
+								class="w-full h-full object-contain"
+								width={200}
+								height={240}
+								loading="lazy"
+							/>
+						</div>
+					</div>
+
+					<div class="heritage-copy reveal-right">
+						<p class="heritage-label label-text text-gold mb-5">
+							<span aria-hidden="true">✦</span> {productsPageHeritage.label}
+						</p>
+
+						<h2 class="text-display font-cinzel font-bold leading-[1.12] mb-6">
+							<span class="block" style="color: #1E1E1E;">The Art Of</span>
+							<span class="block text-gold-gradient">Premium Tea</span>
+							<span class="block" style="color: #1E1E1E;">Premixes</span>
+						</h2>
+
+						<blockquote class="heritage-quote font-playfair italic mb-8">
+							&ldquo;{productsPageHeritage.quote}&rdquo;
+						</blockquote>
+
+						<div class="space-y-5 mb-10">
+							{productsPageHeritage.paragraphs.map((para) => (
+								<p class="font-poppins text-sm md:text-base leading-[1.75]" style="color: #1E1E1E;">
+									{para}
+								</p>
+							))}
+						</div>
+
+						<div class="heritage-divider" aria-hidden="true"></div>
+
+						<div class="heritage-stats reveal">
+							{productsPageHeritage.stats.map((stat, i) => (
+								<div class:list={['heritage-stat-item', i > 0 && 'heritage-stat-item--sep']}>
+									{stat.countUp ? (
+										<p
+											class="heritage-stat-num stat-number font-cinzel font-black text-gold-gradient"
+											data-target={stat.target}
+											data-suffix=""
+										>
+											0
+										</p>
+									) : (
+										<p class="heritage-stat-num font-cinzel font-black text-gold-gradient heritage-stat-num--text">
+											{stat.value}
+										</p>
+									)}
+									<div class="heritage-stat-labels">
+										{stat.lines.map((line) => (
+											<span class="block font-poppins font-medium text-xs tracking-wide" style="color: #1E1E1E;">
+												{line}
+											</span>
+										))}
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- §3 PRODUCT SHOWCASE -->
+		<section id="collection" class="showcase-section section-py" style="background: #FFFFFF;">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal">
+					<p class="showcase-heading-label label-text mb-4" style="color: #1E1E1E;">
+						<span class="text-gold" aria-hidden="true">✦</span> {productsCollection.label}
+					</p>
+					<h2 class="text-display font-cinzel font-bold mb-5 leading-tight">
+						<span style="color: #1E1E1E;">Premium Variant </span>
+						<span class="text-gold-gradient">Showcase</span>
+					</h2>
+					<p class="font-poppins text-sm md:text-base leading-[1.6] text-center" style="color: rgba(30,30,30,0.6);">
+						{productsCollection.subtext}
+					</p>
+				</div>
+
+				<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-7 stagger-group">
+					{products.map((product, index) => (
+						<article class="stagger-child showcase-card group">
+							<span class={`showcase-badge showcase-badge--${product.badgeVariant}`}>
+								{product.badge}
+							</span>
+
+							<a href={`/products/${product.slug}`} class="showcase-image-wrap block overflow-hidden">
+								<ProductImage
+									src={product.image}
+									alt={product.name}
+									class="showcase-image w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+									width={320}
+									height={320}
+									loading={index < 2 ? 'eager' : 'lazy'}
+								/>
+							</a>
+
+							<div class="showcase-card-body">
+								<a href={`/products/${product.slug}`}>
+									<h3 class="font-cinzel font-bold text-base mb-3 leading-snug group-hover:text-gold transition-colors" style="color: #1E1E1E;">
+										{product.name}
+									</h3>
+								</a>
+
+								<p class="showcase-desc font-poppins mb-5" style="color: rgba(30,30,30,0.65);">
+									{product.description}
+								</p>
+
+								<div class="showcase-features-divider" aria-hidden="true"></div>
+
+								<ul class="showcase-features grid grid-cols-2 gap-x-3 gap-y-2 mb-6">
+									{product.highlights.map((feature) => (
+										<li class="showcase-feature-item font-poppins font-medium flex items-start gap-1.5">
+											<span class="text-gold flex-shrink-0">✦</span>
+											{feature}
+										</li>
+									))}
+								</ul>
+
+								<div class="showcase-actions flex flex-col gap-2.5">
+									<a href="/contact" class="btn-gold text-xs py-3 justify-center w-full">
+										{productsPageHero.ctaEnquiry}
+									</a>
+									<a
+										href={whatsappUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="btn-whatsapp-card text-xs py-3 justify-center w-full"
+									>
+										📱 WHATSAPP
+									</a>
+								</div>
+							</div>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- §4 WHY CUSTOMERS LOVE IT -->
+		<section class="trust-section section-py relative section-warm">
+			<div class="relative z-10 max-w-7xl mx-auto px-6">
+				<div class="text-center mb-12 md:mb-16 reveal">
+					<p class="trust-heading-label label-text mb-4 text-gold">
+						<span aria-hidden="true">✦</span> {productsCustomerTrust.label}
+					</p>
+					<h2 class="text-display font-cinzel font-bold">
+						<span class="text-dark">Why Customers </span>
+						<span class="text-gold-gradient">Love It</span>
+					</h2>
+				</div>
+
+				<div class="trust-grid stagger-group">
+					{productsCustomerTrust.items.map((item) => (
+						<div class="stagger-child trust-cell">
+							<div class="trust-icon-circle" aria-hidden="true">
+								<span class="trust-icon-emoji">{item.icon}</span>
+							</div>
+							<p class="trust-cell-label">{item.label}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- §5 FINEST INGREDIENTS -->
+		<section class="ingredients-section section-py" style="background: #FAF8F3;">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="text-center mx-auto mb-12 md:mb-16 reveal">
+					<p class="label-text text-gold mb-4">
+						<span aria-hidden="true">✦</span> {productsFinestIngredients.label}
+					</p>
+					<h2 class="text-display font-cinzel font-bold leading-tight mb-5" style="color: #1E1E1E;">
+						<span class="block">
+							Finest <span class="text-gold-gradient">Ingredients</span>
+						</span>
+						<span class="block">Carefully Selected</span>
+					</h2>
+					<p
+						class="font-poppins text-sm md:text-base leading-[1.75] mx-auto"
+						style="color: rgba(30,30,30,0.6); max-width: 580px;"
+					>
+						{productsFinestIngredients.subtext}
+					</p>
+				</div>
+
+				<div class="ingredients-row stagger-group">
+					{productsFinestIngredients.items.map((ing) => (
+						<div class="stagger-child ingredient-item">
+							<div class="ingredient-icon-circle" style={`background: ${ing.circleBg}`}>
+								<span class="ingredient-emoji" role="img" aria-hidden="true">{ing.icon}</span>
+							</div>
+							<p class="ingredient-name">{ing.name}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- §6 BENEFITS -->
+		<section class="benefits-section section-py" style="background: #F5F0E8;">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="text-center mb-12 md:mb-16 reveal">
+					<p class="label-text text-gold mb-4">
+						<span aria-hidden="true">✦</span> {productsBenefits.label}
+					</p>
+					<h2 class="text-display font-cinzel font-bold">
+						<span class="text-gold-gradient">Benefits </span>
+						<span style="color: #1E1E1E;">That Matter</span>
+					</h2>
+				</div>
+
+				<div class="benefits-grid benefits-stagger-group">
+					{productsBenefits.items.map((b) => (
+						<div class="benefit-card-v2">
+							<span class="benefit-card-num" aria-hidden="true">{b.num}</span>
+							<div class="benefit-icon-circle">
+								<span class="benefit-icon-emoji" aria-hidden="true">{b.icon}</span>
+							</div>
+							<p class="benefit-card-title">{b.title}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- §7 PREPARATION -->
+		<section class="prep-section section-py" style="background: #FAF8F3;">
+			<div class="max-w-6xl mx-auto px-6">
+				<div class="text-center max-w-2xl mx-auto mb-12 md:mb-16 reveal">
+					<p class="label-text text-gold mb-4">
+						<span aria-hidden="true">✦</span> {productsPreparation.label}
+					</p>
+					<h2 class="text-display font-cinzel font-bold leading-tight mb-5">
+						<span class="block" style="color: #1E1E1E;">{productsPreparation.heading[0]}</span>
+						<span class="block text-gold-gradient">{productsPreparation.heading[1]}</span>
+					</h2>
+					<p class="font-poppins text-sm leading-[1.75] text-center" style="color: rgba(30,30,30,0.6);">
+						{productsPreparation.subtext}
+					</p>
+				</div>
+
+				<div class="prep-steps-container">
+					<div class="prep-line-horizontal prep-line-animate" aria-hidden="true"></div>
+					<div class="prep-line-vertical prep-line-animate" aria-hidden="true"></div>
+
+					<div class="prep-steps">
+						{productsPreparation.steps.map((step) => (
+							<div class="prep-step-item">
+								<div class="prep-step-circle">
+									<span class="prep-step-num">STEP {step.num}</span>
+									<span class="prep-step-icon" aria-hidden="true">{step.icon}</span>
+								</div>
+								<div class="prep-step-copy">
+									<p class="prep-step-title">{step.title}</p>
+									<p class="prep-step-desc">{step.detail}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- §8 TRUSTED BY BUSINESS -->
+		<section class="business-section section-py" style="background: #FFFFFF;">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal">
+					<p class="label-text text-gold mb-4">
+						<span aria-hidden="true">✦</span> {productsIdealFor.label}
+					</p>
+					<h2 class="text-display font-cinzel font-bold mb-5">
+						<span style="color: #1E1E1E;">Trusted By Every </span>
+						<span class="text-gold-gradient">Business</span>
+					</h2>
+					<p class="font-poppins text-sm leading-[1.75] text-center" style="color: rgba(30,30,30,0.6);">
+						{productsIdealFor.subtext}
+					</p>
+				</div>
+
+				<div class="business-grid stagger-group">
+					{productsIdealFor.types.map((biz) => (
+						<div class="stagger-child business-card-v2">
+							<div class="business-icon-circle">
+								<span class="business-icon-emoji" aria-hidden="true">{biz.icon}</span>
+							</div>
+							<h3 class="business-card-title">{biz.title}</h3>
+							<p class="business-card-body">{biz.body}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- §9 DEALER PARTNER -->
+		<section class="dealer-section section-py" style="background: #F5F0E8;">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="dealer-grid">
+					<div class="dealer-copy reveal-left">
+						<p class="label-text text-gold mb-4">
+							<span aria-hidden="true">✦</span> {productsDealer.label}
+						</p>
+						<h2 class="dealer-heading font-cinzel font-bold leading-[1.1] mb-6">
+							<span class="block" style="color: #1E1E1E;">Become A Krushnai</span>
+							<span class="block text-gold-gradient">Amrutulya Dealer</span>
+							<span class="block" style="color: #1E1E1E;">Partner</span>
+						</h2>
+						<p class="font-poppins text-sm md:text-base leading-[1.75] mb-8" style="color: #1E1E1E;">
+							{productsDealer.body}
+						</p>
+						<div class="dealer-benefits-grid">
+							{productsDealer.benefits.map((b) => (
+								<div class="dealer-benefit-item">
+									<span class="text-gold">✦</span>
+									<span>{b}</span>
+								</div>
+							))}
+						</div>
+					</div>
+
+					<div class="reveal-right dealer-partner-card-v2">
+						<p class="label-text text-gold mb-5">
+							<span aria-hidden="true">✦</span> {productsDealer.card.label}
+						</p>
+						<span class="dealer-card-emoji" role="img" aria-hidden="true">{productsDealer.card.icon}</span>
+						<h3 class="font-cinzel font-bold text-xl md:text-2xl text-dark mb-4 leading-snug">
+							{productsDealer.card.heading}
+						</h3>
+						<p class="font-poppins text-sm leading-[1.75] mb-8 text-dark/70">
+							{productsDealer.card.body}
+						</p>
+						<a href="/contact" class="btn-gold text-xs py-4 w-full justify-center">
+							{productsDealer.card.cta} →
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- §10 FINAL CTA -->
+		<section class="section-py relative overflow-hidden products-final-cta-v2">
+			<div class="relative z-10 max-w-4xl mx-auto px-6 text-center reveal">
+				<p class="label-text text-gold mb-4">
+					<span aria-hidden="true">✦</span> {productsFinalCta.label}
+				</p>
+				<h2 class="final-cta-heading font-cinzel font-black text-dark mb-6 leading-[1.08]">
+					<span class="block">
+						Looking For <span class="text-gold-gradient">Premium Tea</span>
+					</span>
+					<span class="block">
+						<span class="text-gold-gradient">Premix</span> Solutions?
+					</span>
+				</h2>
+				<p class="font-poppins text-sm md:text-base leading-[1.75] max-w-2xl mx-auto mb-10 text-dark/70">
+					{productsFinalCta.body}
+				</p>
+				<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+					<a href="#collection" class="btn-gold text-xs px-10 py-4">{productsFinalCta.ctaProducts}</a>
+					<a
+						href={whatsappUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="btn-whatsapp text-xs px-10 py-4"
+					>
+						📱 {productsFinalCta.ctaWhatsapp}
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<script>
+			import '../scripts/products-page-animations.js';
+		</script>
+
+	</main>
+	<Footer />
+</BaseLayout>
+
+<style>
+	/* §1 HERO */
+	.products-hero {
+		min-height: max(650px, 100svh);
+	}
+
+	.products-hero-bg {
+		background: var(--gradient-gold-soft);
+	}
+
+	.products-hero-pattern {
+		background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A227' fill-opacity='1'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z M30 10 L50 30 L30 50 L10 30 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+		background-size: 60px 60px;
+		opacity: 0.04;
+		animation: productsHeroPatternDrift 48s linear infinite;
+	}
+
+	@keyframes productsHeroPatternDrift {
+		0% { background-position: 0 0; }
+		100% { background-position: 120px 120px; }
+	}
+
+	.products-hero-glow {
+		background: radial-gradient(ellipse 55% 45% at 75% 50%, rgba(201, 162, 39, 0.1), transparent 68%);
+	}
+
+	.products-hero-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 3rem;
+		align-items: center;
+		min-height: calc(max(650px, 100svh) - 8rem);
+	}
+
+	@media (min-width: 1024px) {
+		.products-hero-grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 2rem;
+		}
+	}
+
+	.products-hero-copy {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+
+	@media (min-width: 1024px) {
+		.products-hero-copy {
+			text-align: left;
+			padding-right: 1rem;
+		}
+	}
+
+	.ph-hero-label-bar {
+		display: inline-flex;
+		align-self: center;
+		margin-bottom: 1.75rem;
+		padding: 0.65rem 1.25rem;
+		border-left: 3px solid #c9a227;
+		background: linear-gradient(90deg, rgba(201, 162, 39, 0.14) 0%, transparent 100%);
+		opacity: 0;
+	}
+
+	@media (min-width: 1024px) {
+		.ph-hero-label-bar {
+			align-self: flex-start;
+		}
+	}
+
+	.ph-hero-label-bar span {
+		font-family: 'Poppins', sans-serif;
+		font-size: 0.7rem;
+		font-weight: 500;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: #c9a227;
+		line-height: 1.4;
+	}
+
+	.products-hero-title {
+		font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+	}
+
+	.ph-hero-word {
+		display: inline-block;
+		margin-right: 0.2em;
+		opacity: 0;
+	}
+
+	.ph-hero-word--gold {
+		background: linear-gradient(135deg, #c9a227 0%, #d4af37 50%, #e8c85a 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.ph-hero-sub {
+		font-size: 11px;
+		letter-spacing: 0.35em;
+		opacity: 0;
+	}
+
+	.ph-hero-body {
+		color: rgba(30, 30, 30, 0.75);
+		opacity: 0;
+	}
+
+	@media (min-width: 1024px) {
+		.ph-hero-body {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+
+	.ph-hero-btns {
+		justify-content: center;
+		opacity: 0;
+	}
+
+	@media (min-width: 1024px) {
+		.ph-hero-btns {
+			justify-content: flex-start;
+		}
+	}
+
+	.products-hero-collage {
+		position: relative;
+		width: 100%;
+		max-width: 520px;
+		height: min(52vh, 520px);
+		min-height: 380px;
+		margin: 0 auto;
+	}
+
+	@media (min-width: 1024px) {
+		.products-hero-collage {
+			max-width: none;
+			height: min(72vh, 580px);
+			margin: 0 0 0 auto;
+		}
+	}
+
+	.ph-card {
+		position: absolute;
+		text-decoration: none;
+		opacity: 0;
+	}
+
+	.ph-card-inner {
+		display: flex;
+		flex-direction: column;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		overflow: hidden;
+		transition: transform 0.45s ease, box-shadow 0.45s ease;
+	}
+
+	.ph-card:hover .ph-card-inner {
+		transform: scale(1.04);
+		box-shadow: 0 28px 60px rgba(0, 0, 0, 0.65);
+	}
+
+	.ph-card-img {
+		width: 100%;
+		height: auto;
+		object-fit: contain;
+		object-position: bottom center;
+		padding: 0.5rem 0 0;
+		filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.5));
+	}
+
+	.ph-card-label {
+		display: block;
+		padding: 0.65rem 0.75rem;
+		font-family: 'Poppins', sans-serif;
+		font-weight: 600;
+		font-size: 10px;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		text-align: center;
+		color: #c9a227;
+		background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.55));
+	}
+
+	.ph-card-float {
+		animation: phCardFloat 5.5s ease-in-out infinite;
+	}
+
+	.ph-card-float--1 { animation-delay: 0s; }
+	.ph-card-float--2 { animation-delay: 0.9s; }
+	.ph-card-float--3 { animation-delay: 1.6s; }
+	.ph-card-float--4 { animation-delay: 2.2s; }
+
+	@keyframes phCardFloat {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-10px); }
+	}
+
+	.ph-card:hover .ph-card-float {
+		animation-play-state: paused;
+	}
+
+	/* Top-left: Jaggery Cardamom — largest */
+	.ph-card--tl {
+		top: 0;
+		left: 0;
+		width: 52%;
+		z-index: 4;
+	}
+	.ph-card--tl .ph-card-inner {
+		transform: rotate(-3deg);
+	}
+	.ph-card--tl:hover .ph-card-inner {
+		transform: rotate(-3deg) scale(1.04);
+	}
+
+	/* Top-right: Sugar Cardamom */
+	.ph-card--tr {
+		top: 4%;
+		right: 0;
+		width: 44%;
+		z-index: 3;
+	}
+	.ph-card--tr .ph-card-inner {
+		transform: rotate(2deg);
+	}
+	.ph-card--tr:hover .ph-card-inner {
+		transform: rotate(2deg) scale(1.04);
+	}
+
+	/* Bottom-left: Rose Tea */
+	.ph-card--bl {
+		bottom: 0;
+		left: 2%;
+		width: 44%;
+		z-index: 2;
+	}
+	.ph-card--bl .ph-card-inner {
+		transform: rotate(-2deg);
+	}
+	.ph-card--bl:hover .ph-card-inner {
+		transform: rotate(-2deg) scale(1.04);
+	}
+
+	/* Bottom-right: Jaggery Basundi */
+	.ph-card--br {
+		bottom: 2%;
+		right: 0;
+		width: 44%;
+		z-index: 1;
+	}
+	.ph-card--br .ph-card-inner {
+		transform: rotate(3deg);
+	}
+	.ph-card--br:hover .ph-card-inner {
+		transform: rotate(3deg) scale(1.04);
+	}
+
+	/* §2 HERITAGE */
+	.heritage-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 3rem;
+		align-items: center;
+	}
+	@media (min-width: 1024px) {
+		.heritage-grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 4rem;
+		}
+	}
+
+	.heritage-visual {
+		position: relative;
+		min-height: 420px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.heritage-visual-glow {
+		position: absolute;
+		width: 85%;
+		height: 85%;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		background: radial-gradient(circle, rgba(201, 162, 39, 0.18) 0%, transparent 68%);
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.heritage-frame {
+		position: relative;
+		z-index: 1;
+		background: #faf8f3;
+		border: 1px solid rgba(30, 30, 30, 0.08);
+		box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+		overflow: hidden;
+	}
+
+	.heritage-frame--main {
+		width: 78%;
+		max-width: 380px;
+		aspect-ratio: 4 / 5;
+		margin: 0 auto;
+	}
+
+	.heritage-frame--overlap {
+		position: absolute;
+		right: 4%;
+		bottom: 6%;
+		width: 38%;
+		max-width: 160px;
+		aspect-ratio: 4 / 5;
+		z-index: 2;
+	}
+
+	.heritage-label span:first-child {
+		margin-right: 0.35em;
+	}
+
+	.heritage-quote {
+		font-size: clamp(1.15rem, 2vw, 1.45rem);
+		line-height: 1.55;
+		color: #c9a227;
+	}
+
+	.heritage-divider {
+		height: 1px;
+		background: linear-gradient(90deg, #c9a227, rgba(201, 162, 39, 0.2));
+		margin-bottom: 2rem;
+	}
+
+	.heritage-stats {
+		display: flex;
+		align-items: stretch;
+		justify-content: flex-start;
+		gap: 0;
+		flex-wrap: wrap;
+	}
+
+	.heritage-stat-item {
+		flex: 1;
+		min-width: 100px;
+		text-align: center;
+		padding: 0 1rem;
+	}
+
+	.heritage-stat-item--sep {
+		border-left: 1px solid rgba(201, 162, 39, 0.45);
+	}
+
+	.heritage-stat-num {
+		font-size: 48px;
+		line-height: 1;
+		margin-bottom: 0.5rem;
+	}
+
+	.heritage-stat-num--text {
+		font-size: clamp(1.5rem, 3vw, 2rem);
+		line-height: 1.15;
+	}
+
+	/* §3 SHOWCASE */
+	.showcase-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		background: #fff;
+		border: 1px solid rgba(201, 162, 39, 0.12);
+		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+		transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+		overflow: hidden;
+	}
+
+	.showcase-card:hover {
+		transform: translateY(-6px);
+		border-color: rgba(201, 162, 39, 0.45);
+		box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
+	}
+
+	.showcase-badge {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 10;
+		display: block;
+		text-align: center;
+		font-family: 'Poppins', sans-serif;
+		font-weight: 600;
+		font-size: 9px;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		padding: 0.5rem 0.75rem;
+	}
+
+	.showcase-badge--est-seller {
+		background: #1a3a2a;
+		color: #faf8f3;
+	}
+
+	.showcase-badge--customer-favorite {
+		background: #c9a227;
+		color: #1e1e1e;
+	}
+
+	.showcase-badge--premium-blend {
+		background: #c4848e;
+		color: #1e1e1e;
+	}
+
+	.showcase-badge--signature {
+		background: #3d2914;
+		color: #c9a227;
+	}
+
+	.showcase-image-wrap {
+		aspect-ratio: 1 / 1;
+		background: #faf8f3;
+		margin-top: 2rem;
+	}
+
+	.showcase-desc {
+		font-size: 13px;
+		line-height: 1.6;
+	}
+
+	.showcase-features-divider {
+		height: 1px;
+		background: rgba(201, 162, 39, 0.35);
+		margin-bottom: 1rem;
+	}
+
+	.showcase-feature-item {
+		font-size: 12px;
+		color: #c9a227;
+		transition: color 0.3s ease;
+	}
+
+	.showcase-card:hover .showcase-feature-item {
+		color: #d4af37;
+	}
+
+	.showcase-card-body {
+		padding: 1.25rem 1.25rem 1.5rem;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.btn-whatsapp-card {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 12px 20px;
+		background: transparent;
+		color: #128c7e;
+		font-family: 'Poppins', sans-serif;
+		font-weight: 600;
+		font-size: 0.75rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		text-decoration: none;
+		border: 1.5px solid rgba(37, 211, 102, 0.55);
+		transition: all 0.35s ease;
+	}
+
+	.btn-whatsapp-card:hover {
+		background: rgba(37, 211, 102, 0.1);
+		border-color: #25d366;
+		color: #1e8e5a;
+	}
+
+	/* §4 TRUST */
+	.trust-heading-label span:first-child {
+		margin-right: 0.35em;
+	}
+
+	.trust-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
+	}
+
+	@media (min-width: 768px) {
+		.trust-grid {
+			grid-template-columns: repeat(4, 1fr);
+			gap: 1.25rem;
+		}
+	}
+
+	.trust-cell {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		padding: 2rem 1rem;
+		background: var(--page-bg-soft);
+		border: 1px solid rgba(201, 162, 39, 0.15);
+		transition: background 0.35s ease, border-color 0.35s ease;
+	}
+
+	.trust-cell:hover {
+		background: rgba(201, 162, 39, 0.06);
+		border-color: rgba(201, 162, 39, 0.25);
+	}
+
+	.trust-icon-circle {
+		width: 72px;
+		height: 72px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(201, 162, 39, 0.12);
+		border: 2px solid rgba(201, 162, 39, 0.35);
+		margin-bottom: 12px;
+		transition: border-color 0.35s ease;
+	}
+
+	.trust-cell:hover .trust-icon-circle {
+		border-color: rgba(201, 162, 39, 0.8);
+	}
+
+	.trust-icon-emoji {
+		font-size: 32px;
+		line-height: 1;
+		filter: sepia(1) saturate(2) hue-rotate(5deg) brightness(1.1);
+	}
+
+	.trust-cell-label {
+		font-family: 'Poppins', sans-serif;
+		font-weight: 600;
+		font-size: 11px;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: rgba(30, 30, 30, 0.75);
+		line-height: 1.35;
+		transition: color 0.35s ease;
+	}
+
+	.trust-cell:hover .trust-cell-label {
+		color: #1e1e1e;
+	}
+
+	/* §5 INGREDIENTS */
+	.ingredients-row {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+		gap: 1.5rem;
+		overflow-x: auto;
+		padding-bottom: 0.5rem;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+	}
+
+	@media (min-width: 1024px) {
+		.ingredients-row {
+			justify-content: space-between;
+			overflow-x: visible;
+			flex-wrap: wrap;
+		}
+	}
+
+	@media (min-width: 640px) and (max-width: 1023px) {
+		.ingredients-row {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1.25rem;
+			overflow-x: visible;
+		}
+	}
+
+	.ingredient-item {
+		flex: 0 0 auto;
+		min-width: 120px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	@media (min-width: 1024px) {
+		.ingredient-item {
+			flex: 1;
+			min-width: 0;
+		}
+	}
+
+	.ingredient-icon-circle {
+		width: 96px;
+		height: 96px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 1rem;
+	}
+
+	.ingredient-emoji {
+		font-size: 64px;
+		line-height: 1;
+	}
+
+	.ingredient-name {
+		font-family: 'Cinzel', serif;
+		font-weight: 600;
+		font-size: 13px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: #1e1e1e;
+	}
+
+	/* §6 BENEFITS */
+	.benefits-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	@media (min-width: 480px) {
+		.benefits-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 768px) {
+		.benefits-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.benefits-grid {
+			grid-template-columns: repeat(5, 1fr);
+		}
+	}
+
+	.benefit-card-v2 {
+		position: relative;
+		background: #ffffff;
+		border: 1px solid rgba(201, 162, 39, 0.2);
+		padding: 28px 20px;
+		text-align: center;
+		transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+		overflow: hidden;
+		opacity: 0;
+	}
+
+	.benefit-card-v2:hover {
+		border-color: rgba(201, 162, 39, 0.6);
+		background: rgba(201, 162, 39, 0.04);
+		transform: translateY(-3px);
+	}
+
+	.benefit-card-num {
+		position: absolute;
+		top: 8px;
+		right: 12px;
+		font-family: 'Poppins', sans-serif;
+		font-weight: 700;
+		font-size: 28px;
+		line-height: 1;
+		color: rgba(201, 162, 39, 0.2);
+		pointer-events: none;
+		user-select: none;
+	}
+
+	.benefit-icon-circle {
+		width: 64px;
+		height: 64px;
+		border-radius: 50%;
+		background: #faf8f3;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 1rem;
+	}
+
+	.benefit-icon-emoji {
+		font-size: 36px;
+		line-height: 1;
+	}
+
+	.benefit-card-title {
+		font-family: 'Poppins', sans-serif;
+		font-weight: 600;
+		font-size: 11px;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #1e1e1e;
+		line-height: 1.4;
+	}
+
+	/* §7 PREPARATION */
+	.prep-steps-container {
+		position: relative;
+	}
+
+	.prep-line-horizontal {
+		display: none;
+		position: absolute;
+		top: 48px;
+		left: 12%;
+		right: 12%;
+		height: 2px;
+		background: linear-gradient(90deg, #c9a227, rgba(201, 162, 39, 0.3));
+		transform: scaleX(0);
+		transform-origin: left center;
+		z-index: 0;
+	}
+
+	.prep-line-vertical {
+		display: none;
+	}
+
+	.prep-steps {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2.5rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.prep-step-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		opacity: 0;
+		max-width: 160px;
+	}
+
+	.prep-step-circle {
+		width: 96px;
+		height: 96px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #c9a227, #d4af37);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 2px;
+		margin-bottom: 1rem;
+		flex-shrink: 0;
+	}
+
+	.prep-step-num {
+		font-family: 'Poppins', sans-serif;
+		font-weight: 700;
+		font-size: 9px;
+		letter-spacing: 0.12em;
+		color: #1e1e1e;
+	}
+
+	.prep-step-icon {
+		font-size: 36px;
+		line-height: 1;
+	}
+
+	.prep-step-title {
+		font-family: 'Poppins', sans-serif;
+		font-weight: 700;
+		font-size: 12px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: #1e1e1e;
+		margin-bottom: 0.35rem;
+	}
+
+	.prep-step-desc {
+		font-family: 'Poppins', sans-serif;
+		font-weight: 400;
+		font-size: 11px;
+		line-height: 1.5;
+		color: rgba(30, 30, 30, 0.6);
+		max-width: 120px;
+	}
+
+	@media (min-width: 1024px) {
+		.prep-line-horizontal {
+			display: block;
+		}
+
+		.prep-steps {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-start;
+			gap: 0;
+		}
+
+		.prep-step-item {
+			flex: 1;
+			max-width: none;
+		}
+	}
+
+	@media (max-width: 1023px) {
+		.prep-steps-container {
+			padding-left: 1.5rem;
+		}
+
+		.prep-line-vertical {
+			display: block;
+			position: absolute;
+			left: 48px;
+			top: 48px;
+			bottom: 48px;
+			width: 2px;
+			background: linear-gradient(180deg, #c9a227, rgba(201, 162, 39, 0.3));
+			transform: scaleY(0);
+			transform-origin: top center;
+		}
+
+		.prep-steps {
+			align-items: flex-start;
+		}
+
+		.prep-step-item {
+			flex-direction: row;
+			align-items: flex-start;
+			text-align: left;
+			gap: 1.25rem;
+			max-width: none;
+			width: 100%;
+		}
+
+		.prep-step-circle {
+			margin-bottom: 0;
+		}
+
+		.prep-step-copy {
+			flex: 1;
+			padding-top: 0.25rem;
+		}
+
+		.prep-step-desc {
+			max-width: none;
+		}
+	}
+
+	/* §8 BUSINESS */
+	.business-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
+	}
+
+	@media (min-width: 1024px) {
+		.business-grid {
+			grid-template-columns: repeat(4, 1fr);
+			gap: 1.25rem;
+		}
+	}
+
+	.business-card-v2 {
+		background: #faf8f3;
+		border: 1px solid rgba(201, 162, 39, 0.2);
+		border-top: 3px solid transparent;
+		padding: 36px 24px;
+		text-align: center;
+		transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, border-top-color 0.35s ease;
+	}
+
+	.business-card-v2:hover {
+		border-top-color: #c9a227;
+		transform: translateY(-4px);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	}
+
+	.business-icon-circle {
+		width: 72px;
+		height: 72px;
+		border-radius: 50%;
+		background: rgba(201, 162, 39, 0.08);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 1.25rem;
+	}
+
+	.business-icon-emoji {
+		font-size: 48px;
+		line-height: 1;
+	}
+
+	.business-card-title {
+		font-family: 'Poppins', sans-serif;
+		font-weight: 700;
+		font-size: 12px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: #1e1e1e;
+		margin-bottom: 0.75rem;
+	}
+
+	.business-card-body {
+		font-family: 'Poppins', sans-serif;
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 1.65;
+		color: rgba(30, 30, 30, 0.6);
+	}
+
+	/* §9 DEALER */
+	.dealer-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+		align-items: stretch;
+	}
+
+	@media (min-width: 1024px) {
+		.dealer-grid {
+			grid-template-columns: 3fr 2fr;
+			gap: 3rem;
+		}
+	}
+
+	.dealer-heading {
+		font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+	}
+
+	.dealer-benefits-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem 1.5rem;
+	}
+
+	.dealer-benefit-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.5rem;
+		font-family: 'Poppins', sans-serif;
+		font-weight: 600;
+		font-size: 12px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: #1e1e1e;
+		line-height: 1.4;
+	}
+
+	.dealer-partner-card-v2 {
+		background: #FFFFFF;
+		border: 1px solid rgba(201, 162, 39, 0.35);
+		padding: 48px 40px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		box-shadow: var(--shadow-card);
+	}
+
+	.dealer-card-emoji {
+		font-size: 56px;
+		line-height: 1;
+		display: block;
+		margin-bottom: 1.25rem;
+	}
+
+	/* §10 FINAL CTA */
+	.products-final-cta-v2 {
+		background: linear-gradient(135deg, #FAF8F3, #FFFFFF, #F5F0E8);
+	}
+
+	.products-final-cta-v2::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: repeating-linear-gradient(
+			-45deg,
+			transparent,
+			transparent 36px,
+			rgba(201, 162, 39, 0.04) 36px,
+			rgba(201, 162, 39, 0.04) 37px
+		);
+		pointer-events: none;
+	}
+
+	.final-cta-heading {
+		font-size: clamp(2rem, 5vw, 3.5rem);
+	}
+
+	.btn-whatsapp {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 14px 36px;
+		background: #25d366;
+		color: #fff;
+		font-family: 'Poppins', sans-serif;
+		font-weight: 600;
+		font-size: 0.85rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		text-decoration: none;
+		border: none;
+		transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.btn-whatsapp:hover {
+		background: #1fb855;
+		transform: scale(1.02);
+		box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+	}
+
+	/* Mobile hero collage → 2×2 grid */
+	@media (max-width: 1023px) {
+		.products-hero-grid {
+			min-height: auto;
+		}
+
+		.products-hero-collage {
+			position: relative;
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 0.75rem;
+			height: auto;
+			min-height: 0;
+			max-width: 340px;
+			margin: 2rem auto 0;
+		}
+
+		.ph-card {
+			position: static;
+			width: 100% !important;
+			opacity: 1;
+		}
+
+		.ph-card-inner {
+			transform: none !important;
+		}
+
+		.ph-card:hover .ph-card-inner {
+			transform: scale(1.04) !important;
+		}
+
+		.ph-card--tl,
+		.ph-card--tr,
+		.ph-card--bl,
+		.ph-card--br {
+			top: auto;
+			left: auto;
+			right: auto;
+			bottom: auto;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.dealer-partner-card-v2 {
+			padding: 36px 28px;
+		}
+	}
+</style>

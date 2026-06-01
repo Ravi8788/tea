@@ -1,0 +1,117 @@
+---
+const testimonials = [
+  {
+    name: 'Priya Sharma',
+    role: 'Hotel Owner, Jaipur',
+    text: 'Krushnai Amrutulya\'s jaggery cardamom premix is a hit with our guests. Authentic taste, consistent quality, and our kitchen staff loves how fast it prepares.',
+    rating: 5,
+  },
+  {
+    name: 'Rajesh Mehta',
+    role: 'Tea Distributor, Mumbai',
+    text: 'As a distributor I\'ve tried hundreds of brands. Krushnai stands apart — premium packaging, strong margins, and customers keep coming back for more.',
+    rating: 5,
+  },
+  {
+    name: 'Anita Desai',
+    role: 'Café Owner, Ahmedabad',
+    text: 'The jaggery basundi tea is unlike anything on our menu. It\'s become our bestseller during festive season. Highly recommend to every café owner.',
+    rating: 5,
+  },
+  {
+    name: 'Vikram Singh',
+    role: 'Retail Partner, Udaipur',
+    text: 'Rose tea from Krushnai is the perfect premium gift product. Elegant packaging, divine fragrance, and excellent dealer support from day one.',
+    rating: 5,
+  },
+  {
+    name: 'Suresh Patel',
+    role: 'Restaurant Chain, Surat',
+    text: 'We switched all our outlets to Krushnai premix six months ago. Same taste every cup, every outlet, every day. That consistency is priceless.',
+    rating: 5,
+  },
+];
+---
+
+<section id="testimonials" class="section-py section-light">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-14 reveal">
+      <p class="label-text text-gold mb-3">Testimonials</p>
+      <h2 class="text-display font-cinzel font-bold text-dark">
+        What Our <span class="text-gold-gradient">Partners Say</span>
+      </h2>
+    </div>
+
+    <div class="swiper testimonial-swiper reveal">
+      <div class="swiper-wrapper pb-14">
+        {testimonials.map(t => (
+          <div class="swiper-slide">
+            <div class="glass-card p-8 md:p-10 h-full flex flex-col border" style="border-color: rgba(201,162,39,0.15);">
+              <div class="flex gap-1 mb-6">
+                {Array.from({ length: t.rating }).map(() => (
+                  <svg width="16" height="16" viewBox="0 0 18 18" fill="#C9A227" aria-hidden="true">
+                    <path d="M9 1l2.2 4.5 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L1.8 6.2l5-.7L9 1z"/>
+                  </svg>
+                ))}
+              </div>
+              <blockquote class="font-playfair italic text-dark/75 text-base leading-relaxed flex-1 mb-8">
+                "{t.text}"
+              </blockquote>
+              <div class="flex items-center gap-3 pt-6 border-t" style="border-color: rgba(201,162,39,0.12);">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center font-cinzel font-bold text-sm flex-shrink-0" style="background: rgba(201,162,39,0.15); color: #C9A227;">
+                  {t.name.charAt(0)}
+                </div>
+                <div>
+                  <p class="font-cinzel font-semibold text-gold text-sm">{t.name}</p>
+                  <p class="font-poppins text-dark/50 text-xs mt-0.5">{t.role}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="swiper-pagination testimonial-pagination"></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import Swiper from 'swiper';
+  import { Pagination, Autoplay } from 'swiper/modules';
+  import { onAppReady } from '../scripts/ready.js';
+
+  onAppReady(() => {
+    const el = document.querySelector('.testimonial-swiper');
+    if (!el || el.dataset.swiperInit === 'true') return;
+
+    new Swiper(el, {
+      modules: [Pagination, Autoplay],
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: true,
+      autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
+      pagination: { el: '.testimonial-pagination', clickable: true },
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1280: { slidesPerView: 3 },
+      },
+      on: {
+        init() {
+          el.dataset.swiperInit = 'true';
+        },
+      },
+    });
+  });
+</script>
+
+<style>
+  .testimonial-swiper :global(.swiper-pagination-bullet) {
+    background: #C9A227;
+    opacity: 0.35;
+  }
+  .testimonial-swiper :global(.swiper-pagination-bullet-active) {
+    opacity: 1;
+  }
+</style>

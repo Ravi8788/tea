@@ -1,0 +1,42 @@
+---
+interface Props {
+	title: string;
+	subtitle?: string;
+	align?: 'left' | 'center';
+	light?: boolean;
+	class?: string;
+}
+
+const { title, subtitle, align = 'center', light = false, class: className = '' } = Astro.props;
+---
+
+<div
+	class:list={[
+		'mb-12',
+		align === 'center' ? 'text-center' : 'text-left',
+		className,
+	]}
+>
+	{
+		subtitle && (
+			<p
+				class:list={[
+					'mb-3 font-poppins text-xs uppercase tracking-[0.3em]',
+					light ? 'text-gold' : 'text-gold-dark',
+				]}
+			>
+				{subtitle}
+			</p>
+		)
+	}
+	<h2
+		class:list={[
+			'font-cinzel-deco text-3xl md:text-4xl lg:text-5xl leading-tight',
+			light ? 'text-cream' : 'text-royal-maroon',
+		]}
+	>
+		{title}
+	</h2>
+</div>
+
+

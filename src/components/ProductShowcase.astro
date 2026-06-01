@@ -1,0 +1,121 @@
+---
+import { products } from '../data/products';
+---
+
+<section id="products" class="section-py section-soft">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 reveal">
+      <div>
+        <p class="label-text text-gold mb-3">Our Collection</p>
+        <h2 class="text-display font-cinzel font-bold text-dark">
+          Signature <span class="text-gold-gradient">Tea Premixes</span>
+        </h2>
+      </div>
+      <a href="/products" class="btn-outline text-xs px-6 py-3 self-start md:self-auto">
+        View All Products →
+      </a>
+    </div>
+
+    <div class="swiper product-swiper reveal">
+      <div class="swiper-wrapper pb-14">
+        {products.map(product => (
+          <div class="swiper-slide h-auto">
+            <a href={`/products/${product.slug}`} class="group block bg-white overflow-hidden h-full shadow-sm hover:shadow-xl transition-shadow duration-300" style="border: 1px solid rgba(201,162,39,0.12);">
+              <div class="overflow-hidden relative" style="aspect-ratio: 4/5;">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  width="320"
+                  height="400"
+                  loading="lazy"
+                />
+                <span class="absolute top-3 right-0 z-10 font-poppins font-semibold text-white text-[10px] uppercase tracking-wider px-3 py-1.5 product-badge">
+                  {product.badge}
+                </span>
+              </div>
+              <div class="p-5">
+                <h3 class="font-cinzel font-bold text-sm uppercase tracking-wide mb-2 group-hover:text-gold transition-colors duration-300" style="color: #1E1E1E;">
+                  {product.name}
+                </h3>
+                <p class="font-poppins text-xs leading-relaxed line-clamp-3 mb-4" style="color: rgba(30,30,30,0.72);">
+                  {product.description}
+                </p>
+                <ul class="space-y-1.5">
+                  {product.highlights.slice(0, 3).map(h => (
+                    <li class="flex items-center gap-2 font-poppins text-[11px]" style="color: rgba(30,30,30,0.8);">
+                      <span class="flex-shrink-0 w-1.5 h-1.5 rotate-45" style="background: #C9A227;"></span>
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+      <div class="swiper-button-prev product-prev"></div>
+      <div class="swiper-button-next product-next"></div>
+      <div class="swiper-pagination product-pagination"></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import Swiper from 'swiper';
+  import { Pagination, Navigation, Autoplay } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/pagination';
+  import 'swiper/css/navigation';
+  import { onAppReady } from '../scripts/ready.js';
+
+  onAppReady(() => {
+    const el = document.querySelector('.product-swiper');
+    if (!el || el.dataset.swiperInit === 'true') return;
+
+    new Swiper(el, {
+      modules: [Pagination, Navigation, Autoplay],
+      slidesPerView: 1,
+      spaceBetween: 20,
+      autoplay: { delay: 3500, disableOnInteraction: false },
+      pagination: { el: '.product-pagination', clickable: true },
+      navigation: { nextEl: '.product-next', prevEl: '.product-prev' },
+      breakpoints: {
+        640: { slidesPerView: 2, spaceBetween: 24 },
+        1024: { slidesPerView: 3, spaceBetween: 28 },
+        1280: { slidesPerView: 4, spaceBetween: 32 },
+      },
+      on: {
+        init() {
+          el.dataset.swiperInit = 'true';
+        },
+      },
+    });
+  });
+</script>
+
+<style>
+  .product-swiper :global(.swiper-pagination-bullet) {
+    background: #C9A227;
+    opacity: 0.35;
+  }
+  .product-swiper :global(.swiper-pagination-bullet-active) {
+    opacity: 1;
+  }
+  .product-swiper :global(.swiper-button-prev),
+  .product-swiper :global(.swiper-button-next) {
+    color: #C9A227;
+    transform: scale(0.7);
+  }
+  .product-swiper :global(.swiper-button-prev::after),
+  .product-swiper :global(.swiper-button-next::after) {
+    font-size: 1.2rem;
+  }
+  .product-badge {
+    background: linear-gradient(135deg, #C9A227, #D4AF37);
+    clip-path: polygon(8px 0, 100% 0, 100% 100%, 0 100%, 0 8px);
+    box-shadow: 0 2px 8px rgba(201, 162, 39, 0.4);
+  }
+</style>

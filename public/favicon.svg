@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="4" fill="#4A0E0E"/>
+  <path d="M16 6L18 13H26L20 17L22 24L16 20L10 24L12 17L6 13H14L16 6Z" fill="#C9A227"/>
+  <text x="16" y="30" text-anchor="middle" fill="#C9A227" font-family="serif" font-size="4">KA</text>
+</svg>

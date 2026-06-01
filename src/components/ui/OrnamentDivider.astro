@@ -1,0 +1,20 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['flex items-center justify-center gap-4', className]}>
+	<span class="h-px flex-1 max-w-[80px] bg-gradient-to-r from-transparent to-gold/60"></span>
+	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="text-gold shrink-0">
+		<path
+			d="M12 2L14.5 9.5H22L16 14L18.5 21.5L12 17L5.5 21.5L8 14L2 9.5H9.5L12 2Z"
+			fill="currentColor"
+			opacity="0.8"></path>
+	</svg>
+	<span class="h-px flex-1 max-w-[80px] bg-gradient-to-l from-transparent to-gold/60"></span>
+</div>
+
+

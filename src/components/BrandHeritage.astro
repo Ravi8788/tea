@@ -1,0 +1,168 @@
+---
+const timeline = [
+  {
+    year: '2023',
+    title: 'The Beginning',
+    desc: 'Krushnai Amrutulya founded in Rajasthan with a vision to bring authentic jaggery chai premix to India.',
+  },
+  {
+    year: '2023',
+    title: 'First Blend Launched',
+    desc: 'Jaggery Cardamom Tea Premix — our signature blend — introduced to local hotels and tea stalls.',
+  },
+  {
+    year: '2024',
+    title: 'FSSAI Certification',
+    desc: 'Achieved FSSAI certification and expanded manufacturing to a hygienic, state-of-the-art facility.',
+  },
+  {
+    year: '2024',
+    title: 'Full Product Range',
+    desc: 'Launched all 4 signature blends — Jaggery Cardamom, Sugar Cardamom, Rose Tea, and Jaggery Basundi.',
+  },
+  {
+    year: '2025',
+    title: '500+ Customers',
+    desc: 'Crossed 500 happy customers and 50 business partners across 28 states of India.',
+  },
+  {
+    year: '2026',
+    title: 'Pan India Growth',
+    desc: 'Expanding dealer network nationwide with 48-hour dispatch and dedicated business support.',
+  },
+];
+---
+
+<section id="heritage" class="section-py" style="background: var(--cream);">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- Top: Founder + Story -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20">
+      <div class="reveal order-2 lg:order-1">
+        <p class="label-text text-gold mb-3">Our Heritage</p>
+        <h2 class="text-display font-cinzel font-bold mb-6 leading-tight" style="color: var(--dark);">
+          A Legacy of <span class="text-gold-gradient">Royal Chai</span>
+        </h2>
+        <div class="w-12 h-0.5 mb-8" style="background: #C9A227;"></div>
+        <div class="space-y-4 font-poppins leading-relaxed text-sm md:text-base" style="color: rgba(30,30,30,0.75);">
+          <p>
+            Krushnai Amrutulya was born in Rajasthan when our founder set out to preserve the authentic
+            taste of traditional jaggery chai — and make it accessible to every hotel, café, and home across India.
+          </p>
+          <p>
+            What began as a family recipe is now a FSSAI-certified premium tea premix brand, trusted by
+            500+ customers and 50+ business partners in 28 states.
+          </p>
+        </div>
+        <a href="/about" class="btn-outline inline-flex mt-8 text-xs px-6 py-3">
+          Meet Our Founder →
+        </a>
+      </div>
+
+      <div class="reveal-right order-1 lg:order-2 relative">
+        <div class="relative overflow-hidden founder-heritage-frame" style="aspect-ratio: 4/5;">
+          <img
+            src="/images/founder.png"
+            alt="Vinod Parihar, Founder of Krushnai Amrutulya — premium jaggery tea premix from Rajasthan"
+            class="h-full w-full object-cover"
+            style="object-position: center top;"
+            width="600"
+            height="750"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 border m-4 pointer-events-none" style="border-color: rgba(201,162,39,0.3);"></div>
+        </div>
+        <div class="absolute -bottom-5 -left-5 px-8 py-5 hidden md:block bg-white border border-gold/30 shadow-lg">
+          <p class="font-cinzel-deco tracking-wider" style="color: #C9A227; font-size: 1.25rem;">Est. 2023</p>
+          <p class="label-text mt-1 text-dark/50">Rajasthan, India</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Timeline -->
+    <div class="reveal">
+      <div class="text-center mb-12">
+        <p class="label-text text-gold mb-3">Our Journey</p>
+        <h3 class="text-heading font-cinzel font-bold" style="color: var(--dark);">
+          Milestones That <span class="text-gold-gradient">Shape Us</span>
+        </h3>
+      </div>
+
+      <div class="heritage-timeline max-w-3xl mx-auto" id="heritage-timeline">
+        {timeline.map((item, i) => (
+          <div class="timeline-item flex gap-6 md:gap-10 pb-10 last:pb-0 cursor-pointer group" data-index={i}>
+            <!-- Line + dot -->
+            <div class="flex flex-col items-center flex-shrink-0">
+              <div
+                class="timeline-dot w-4 h-4 rounded-full border-2 transition-all duration-300 flex-shrink-0"
+                style="border-color: #C9A227; background: var(--cream);"
+              ></div>
+              {i < timeline.length - 1 && (
+                <div class="timeline-line w-px flex-1 mt-2 transition-all duration-300" style="background: rgba(201,162,39,0.25); min-height: 48px;"></div>
+              )}
+            </div>
+            <!-- Content -->
+            <div class="timeline-content pb-2 flex-1 transition-all duration-300 opacity-60 group-[.active]:opacity-100">
+              <span class="label-text" style="color: #C9A227;">{item.year}</span>
+              <h4 class="font-cinzel font-semibold text-base md:text-lg mt-1 mb-2 transition-colors duration-300 group-[.active]:text-gold" style="color: var(--dark);">{item.title}</h4>
+              <p class="font-poppins text-sm leading-relaxed timeline-desc hidden group-[.active]:block" style="color: rgba(30,30,30,0.65);">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function initTimeline() {
+    const items = document.querySelectorAll('#heritage-timeline .timeline-item');
+    if (!items.length) return;
+
+    function activate(index) {
+      items.forEach((item, i) => {
+        const dot = item.querySelector('.timeline-dot');
+        const line = item.querySelector('.timeline-line');
+        if (i === index) {
+          item.classList.add('active');
+          if (dot) { dot.style.background = '#C9A227'; dot.style.boxShadow = '0 0 12px rgba(201,162,39,0.5)'; }
+          if (line) line.style.background = '#C9A227';
+        } else {
+          item.classList.remove('active');
+          if (dot) { dot.style.background = 'var(--cream)'; dot.style.boxShadow = 'none'; }
+          if (line) line.style.background = 'rgba(201,162,39,0.25)';
+        }
+      });
+    }
+
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => activate(i));
+      item.addEventListener('mouseenter', () => activate(i));
+    });
+
+    activate(0);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTimeline);
+  } else {
+    initTimeline();
+  }
+</script>
+
+<style>
+  .timeline-item.active .timeline-dot {
+    background: #C9A227 !important;
+    box-shadow: 0 0 12px rgba(201, 162, 39, 0.5);
+  }
+  .timeline-item.active .timeline-content {
+    opacity: 1 !important;
+  }
+  .timeline-item.active .timeline-desc {
+    display: block !important;
+  }
+  .timeline-item.active h4 {
+    color: #C9A227 !important;
+  }
+</style>

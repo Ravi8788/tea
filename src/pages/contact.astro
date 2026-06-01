@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { company, companyAddressFormatted, mapsEmbedUrl, companyTelUrl } from '../data/company';
+import { seoPages } from '../data/seo';
+import { breadcrumbSchema, contactPageSchema, organizationSchema } from '../lib/seo';
+
+const addressLines = companyAddressFormatted.split('\n');
+---
+
+<BaseLayout
+  title={seoPages.contact.title}
+  description={seoPages.contact.description}
+  keywords={seoPages.contact.keywords}
+  canonicalPath="/contact/"
+  schema={[
+    organizationSchema(),
+    contactPageSchema(),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Contact', path: '/contact/' },
+    ]),
+  ]}
+>
+  <Header />
+  <main>
+
+    <section class="section-py pt-32 relative overflow-hidden section-soft">
+      <div class="absolute inset-0 mughal-texture opacity-30"></div>
+      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center reveal">
+        <p class="label-text text-gold mb-4">Reach Us</p>
+        <h1 class="text-display font-cinzel font-bold text-dark mb-6">
+          Contact <span class="text-gold-gradient">Krushnai Amrutulya</span>
+        </h1>
+        <p class="font-playfair italic text-dark/60 text-sub max-w-xl mx-auto">
+          Bulk orders, dealer enquiries, or product questions — we'd love to hear from you.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-py section-light">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+          <!-- Contact Form -->
+          <div class="reveal">
+            <h2 class="font-cinzel font-bold text-dark text-xl mb-2">Send a Message</h2>
+            <p class="font-poppins text-dark/55 text-sm mb-8">We respond within 24 hours on business days.</p>
+            <form class="space-y-5" action={company.contactFormAction} method="POST">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="name" class="label-text text-gold/70 mb-2 block">Full Name *</label>
+                  <input type="text" id="name" name="name" required class="form-input" />
+                </div>
+                <div>
+                  <label for="phone" class="label-text text-gold/70 mb-2 block">Phone *</label>
+                  <input type="tel" id="phone" name="phone" required class="form-input" />
+                </div>
+              </div>
+              <div>
+                <label for="email" class="label-text text-gold/70 mb-2 block">Email *</label>
+                <input type="email" id="email" name="email" required class="form-input" />
+              </div>
+              <div>
+                <label for="subject" class="label-text text-gold/70 mb-2 block">Subject</label>
+                <select id="subject" name="subject" class="form-input">
+                  <option value="bulk">Bulk Order Enquiry</option>
+                  <option value="dealer">Dealer Partnership</option>
+                  <option value="product">Product Information</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="message" class="label-text text-gold/70 mb-2 block">Message *</label>
+                <textarea id="message" name="message" rows="5" required class="form-input resize-none"></textarea>
+              </div>
+              <button type="submit" class="btn-gold text-xs px-10 py-4">Send Message →</button>
+            </form>
+          </div>
+
+          <!-- Contact Info + Map -->
+          <div class="reveal-right space-y-8">
+            <div class="glass-card p-8">
+              <h2 class="font-cinzel font-bold text-gold text-lg mb-6">Get in Touch</h2>
+              <ul class="space-y-5 font-poppins text-sm text-dark/65">
+                <li class="flex gap-4">
+                  <span class="flex-shrink-0" style="color: #C9A227;">📍</span>
+                  <span>
+                    <span class="block font-cinzel font-semibold text-gold text-sm mb-2">{company.name}</span>
+                    <span class="block text-xs label-text text-gold/70 mb-2">Manufactured & Packed By</span>
+                    {addressLines.map((line) => (
+                      <span class="block">{line}</span>
+                    ))}
+                  </span>
+                </li>
+                <li class="flex gap-4 items-start">
+                  <span class="flex-shrink-0" style="color: #C9A227;">✓</span>
+                  <span>
+                    <span class="block font-medium text-gold/90">FSSAI Lic. No.</span>
+                    <span class="block font-cinzel tracking-wide">{company.fssaiLicense}</span>
+                  </span>
+                </li>
+                <li class="flex gap-4 items-center">
+                  <span style="color: #C9A227;">📞</span>
+                  <a href={companyTelUrl} class="hover:text-gold transition-colors">{company.phoneDisplay}</a>
+                </li>
+                <li class="flex gap-4 items-center">
+                  <span style="color: #C9A227;">✉️</span>
+                  <a href="mailto:info@krushnaiamrutulya.com" class="hover:text-gold transition-colors">info@krushnaiamrutulya.com</a>
+                </li>
+                <li class="flex gap-4">
+                  <span style="color: #C9A227;">🕐</span>
+                  <span>Mon – Sat: 9:00 AM – 6:00 PM IST</span>
+                </li>
+              </ul>
+              <div class="mt-8 flex flex-col gap-3">
+                <a href={company.whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-outline text-xs py-3 text-center">💬 WhatsApp Us</a>
+              </div>
+            </div>
+
+            <!-- Map embed (Rajasthan, India) -->
+            <div class="overflow-hidden border" style="border-color: rgba(201,162,39,0.2);">
+              <iframe
+                title={`${company.name} — Sojat, Pali, Rajasthan`}
+                src={mapsEmbedUrl}
+                width="100%"
+                height="280"
+                style="border:0; filter: grayscale(30%) contrast(1.1);"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
