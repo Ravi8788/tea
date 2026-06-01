@@ -99,6 +99,45 @@ Change this only if you use a different domain.
 
 ---
 
+## Netlify deployment (preview / alternate hosting)
+
+If you deploy to [Netlify](https://netlify.com) instead of Hostinger, the repo includes **`netlify.toml`** with the correct settings.
+
+### Netlify site settings (must match)
+
+| Setting | Value |
+|---------|-------|
+| **Build command** | `npm run build` |
+| **Publish directory** | `dist` |
+| **Node version** | 22 |
+
+In Netlify: **Site configuration → Build & deploy → Build settings**
+
+### Connect GitHub repo
+
+1. Netlify → **Add new site → Import an existing project**
+2. Choose **GitHub** → select `Ravi8788/tea`
+3. Netlify reads `netlify.toml` automatically — verify **Publish directory = `dist`**
+4. Deploy
+
+### Fix for "404 Not Found" on homepage
+
+This happens when Netlify publishes the **repo root** instead of **`dist/`**:
+
+1. **Site configuration → Build & deploy → Build settings**
+2. Set **Publish directory** to `dist` (not empty, not `/`)
+3. Set **Build command** to `npm run build`
+4. **Deploys → Trigger deploy → Clear cache and deploy site**
+
+Check the deploy log — build must finish with `Complete!` and `dist/index.html` must exist.
+
+### Custom domain on Netlify
+
+**Domain management → Add domain** → `krushnaiamrutulya.com`  
+Update DNS at your registrar to Netlify's nameservers or A/CNAME records.
+
+---
+
 ## Hostinger deployment guide
 
 ### What you need from Hostinger
