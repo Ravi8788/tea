@@ -1,5 +1,6 @@
 ---
 import { products } from '../data/products';
+import ProductImage from './ProductImage.astro';
 ---
 
 <section id="products" class="section-py section-soft">
@@ -19,21 +20,21 @@ import { products } from '../data/products';
 
     <div class="swiper product-swiper reveal">
       <div class="swiper-wrapper pb-14">
-        {products.map(product => (
+        {products.map((product, index) => (
           <div class="swiper-slide h-auto">
-            <a href={`/products/${product.slug}`} class="group block bg-white overflow-hidden h-full shadow-sm hover:shadow-xl transition-shadow duration-300" style="border: 1px solid rgba(201,162,39,0.12);">
-              <div class="overflow-hidden relative" style="aspect-ratio: 4/5;">
-                <img
+            <a href={`/products/${product.slug}`} class="product-card group block bg-white h-full shadow-sm hover:shadow-xl transition-shadow duration-300">
+              <span class={`product-card-badge product-card-badge--${product.badgeVariant}`}>
+                {product.badge}
+              </span>
+              <div class="product-card-image-wrap">
+                <ProductImage
                   src={product.image}
                   alt={product.name}
-                  class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  width="320"
-                  height="400"
-                  loading="lazy"
+                  class="product-card-image w-full h-full"
+                  width={512}
+                  height={341}
+                  loading={index < 2 ? 'eager' : 'lazy'}
                 />
-                <span class="absolute top-3 right-0 z-10 font-poppins font-semibold text-white text-[10px] uppercase tracking-wider px-3 py-1.5 product-badge">
-                  {product.badge}
-                </span>
               </div>
               <div class="p-5">
                 <h3 class="font-cinzel font-bold text-sm uppercase tracking-wide mb-2 group-hover:text-gold transition-colors duration-300" style="color: #1E1E1E;">
@@ -97,6 +98,68 @@ import { products } from '../data/products';
 </script>
 
 <style>
+  .product-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(201, 162, 39, 0.12);
+  }
+
+  .product-card-badge {
+    display: block;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .product-card-badge--est-seller {
+    background: #1a3a2a;
+    color: #faf8f3;
+  }
+
+  .product-card-badge--customer-favorite {
+    background: #c9a227;
+    color: #1e1e1e;
+  }
+
+  .product-card-badge--premium-blend {
+    background: #c4848e;
+    color: #1e1e1e;
+  }
+
+  .product-card-badge--signature {
+    background: #3d2914;
+    color: #c9a227;
+  }
+
+  .product-card-image-wrap {
+    aspect-ratio: 3 / 2;
+    background: #faf8f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 0.5rem;
+    overflow: hidden;
+  }
+
+  .product-card-image-wrap :global(.product-img) {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    transform: none;
+  }
+
+  .product-card:hover .product-card-image-wrap :global(.product-img) {
+    transform: scale(1.03);
+    transition: transform 0.5s ease;
+  }
+
   .product-swiper :global(.swiper-pagination-bullet) {
     background: #C9A227;
     opacity: 0.35;
@@ -112,10 +175,5 @@ import { products } from '../data/products';
   .product-swiper :global(.swiper-button-prev::after),
   .product-swiper :global(.swiper-button-next::after) {
     font-size: 1.2rem;
-  }
-  .product-badge {
-    background: linear-gradient(135deg, #C9A227, #D4AF37);
-    clip-path: polygon(8px 0, 100% 0, 100% 100%, 0 100%, 0 8px);
-    box-shadow: 0 2px 8px rgba(201, 162, 39, 0.4);
   }
 </style>
