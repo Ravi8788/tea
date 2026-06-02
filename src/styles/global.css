@@ -55,8 +55,9 @@
 }
 
 html {
-  scroll-behavior: auto; /* Lenis handles this */
+  scroll-behavior: auto;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 body {
@@ -64,7 +65,10 @@ body {
   background-color: var(--page-bg);
   color: var(--text-primary);
   overflow-x: hidden;
+  overflow-y: visible;
+  min-height: 100%;
   -webkit-font-smoothing: antialiased;
+  touch-action: pan-y;
 }
 
 /* =====================

@@ -157,36 +157,51 @@ function finishLoading() {
 	}, prefersReducedMotion() ? 0 : 500);
 }
 
+function forceDismissLoading() {
+	const loadingScreen = document.getElementById('loading-screen');
+	if (loadingScreen) {
+		loadingScreen.classList.add('hidden');
+		loadingScreen.style.display = 'none';
+	}
+	if (document.body.dataset.appReady !== 'true') {
+		showStaticContent();
+		markAppReady();
+	}
+	ScrollTrigger.refresh();
+}
+
 onReady(() => {
+	/* Safety: never block the page behind the loading overlay (common on mobile) */
+	setTimeout(forceDismissLoading, 2800);
+
 	if (prefersReducedMotion()) {
 		showStaticContent();
 		markAppReady();
-		const loadingScreen = document.getElementById('loading-screen');
-		if (loadingScreen) loadingScreen.style.display = 'none';
-		ScrollTrigger.refresh();
+		forceDismissLoading();
 		return;
 	}
 
-	initScrollAnimations();
+	try {
+		initScrollAnimations();
+	} catch (err) {
+		console.warn('Scroll animations skipped:', err);
+		showStaticContent();
+	}
 
-	const loadingScreen = document.getElementById('loading-screen');
 	const loadingBar = document.getElementById('loading-bar-fill');
 	const mobile = isMobileExperience();
 	const barFillMs = mobile ? 700 : 1400;
-	const hideMs = mobile ? 950 : 1600;
-
-	if (loadingBar) {
-		setTimeout(() => {
-			loadingBar.style.width = '100%';
-		}, 80);
-
-		setTimeout(finishLoading, hideMs);
-	} else {
-		markAppReady();
-	}
+	const hideMs = mobile ? 800 : 1600;
 
 	if (loadingBar) {
 		loadingBar.style.transition = `width ${barFillMs}ms ease`;
+		setTimeout(() => {
+			loadingBar.style.width = '100%';
+		}, 80);
+		setTimeout(finishLoading, hideMs);
+	} else {
+		markAppReady();
+		forceDismissLoading();
 	}
 });
 

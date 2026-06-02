@@ -150,12 +150,25 @@
    ===================== */
 html.native-scroll {
   scroll-behavior: auto;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 html.native-scroll body {
+  height: auto;
+  min-height: 100%;
   overflow-x: hidden;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: none;
+  touch-action: pan-y;
+  position: relative;
+}
+
+html.native-scroll #loading-screen.hidden {
+  display: none !important;
+  pointer-events: none !important;
 }
 
 @media (max-width: 767px) {

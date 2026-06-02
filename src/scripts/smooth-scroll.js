@@ -8,12 +8,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 const useLenis = !isMobileExperience() && !prefersReducedMotion();
 
+function enableNativeScroll() {
+	document.documentElement.classList.add('native-scroll');
+	document.body.classList.add('native-scroll');
+
+	ScrollTrigger.config({ limitCallbacks: true });
+
+	const onScroll = () => ScrollTrigger.update();
+	window.addEventListener('scroll', onScroll, { passive: true });
+	document.addEventListener('scroll', onScroll, { passive: true });
+
+	const refresh = () => ScrollTrigger.refresh();
+	window.addEventListener('load', refresh, { once: true });
+	window.addEventListener('orientationchange', () => setTimeout(refresh, 300));
+	window.addEventListener('resize', () => {
+		clearTimeout(window.__stRefreshTimer);
+		window.__stRefreshTimer = setTimeout(refresh, 200);
+	});
+}
+
 if (useLenis) {
 	const lenis = new Lenis({
 		duration: 1.2,
 		easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 		smoothWheel: true,
-		touchMultiplier: 1.5,
+		touchMultiplier: 1.2,
 	});
 
 	lenis.on('scroll', ScrollTrigger.update);
@@ -25,14 +44,5 @@ if (useLenis) {
 
 	window.__lenis = lenis;
 } else {
-	document.documentElement.classList.add('native-scroll');
-	ScrollTrigger.config({ limitCallbacks: true });
-
-	const refresh = () => ScrollTrigger.refresh();
-	window.addEventListener('load', refresh, { once: true });
-	window.addEventListener('orientationchange', () => setTimeout(refresh, 250));
-	window.addEventListener('resize', () => {
-		clearTimeout(window.__stRefreshTimer);
-		window.__stRefreshTimer = setTimeout(refresh, 200);
-	});
+	enableNativeScroll();
 }

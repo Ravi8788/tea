@@ -84,6 +84,50 @@ function isActive(href: string) {
     inset: 0;
     z-index: 998;
   }
+
+  .mobile-menu-close {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 1px solid rgba(201, 162, 39, 0.45);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--gold);
+    cursor: pointer;
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  }
+  .mobile-menu-close:hover {
+    background: rgba(201, 162, 39, 0.12);
+    border-color: var(--gold);
+  }
+  .mobile-menu-close:active {
+    transform: scale(0.94);
+  }
+  .mobile-menu-close svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    stroke: currentColor;
+    stroke-width: 1.75;
+  }
+  @media (min-width: 480px) {
+    .mobile-menu-close {
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 3rem;
+      height: 3rem;
+    }
+    .mobile-menu-close svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
 </style>
 
 <header id="main-header" class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-12 py-3 sm:py-4 lg:py-5">
@@ -131,7 +175,7 @@ function isActive(href: string) {
     </div>
 
     <!-- Mobile Hamburger -->
-    <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+    <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <span class="w-6 h-px bg-gold block"></span>
       <span class="w-4 h-px bg-gold block"></span>
       <span class="w-6 h-px bg-gold block"></span>
@@ -141,6 +185,16 @@ function isActive(href: string) {
 
 <!-- Mobile Menu Overlay -->
 <div id="mobile-menu" class="hidden lg:hidden">
+  <button
+    type="button"
+    id="mobile-menu-close"
+    class="mobile-menu-close lg:hidden"
+    aria-label="Close menu"
+  >
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
+    </svg>
+  </button>
   {navLinks.map(link => (
     <a href={link.href} class="mobile-nav-link font-cinzel text-2xl text-dark hover:text-gold transition-colors tracking-widest uppercase">
       {link.label}

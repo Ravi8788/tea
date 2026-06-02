@@ -115,6 +115,9 @@ const heroPoster = '/images/hero/hero-jaggery-cardamom.png';
 			loop: true,
 			speed: isMobile ? 500 : 900,
 			allowTouchMove: true,
+			touchStartPreventDefault: false,
+			touchMoveStopPropagation: false,
+			passiveListeners: true,
 			autoplay: {
 				delay: 4500,
 				disableOnInteraction: false,
@@ -180,7 +183,7 @@ const heroPoster = '/images/hero/hero-jaggery-cardamom.png';
 		min-height: auto;
 		display: flex;
 		align-items: center;
-		overflow: hidden;
+		overflow: visible;
 		padding-bottom: 3rem;
 	}
 
@@ -217,6 +220,7 @@ const heroPoster = '/images/hero/hero-jaggery-cardamom.png';
 	.home-hero-swiper {
 		width: 100%;
 		overflow: hidden;
+		touch-action: pan-y pinch-zoom;
 	}
 
 	.home-hero-swiper :global(.swiper-wrapper),

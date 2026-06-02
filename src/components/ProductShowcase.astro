@@ -80,6 +80,8 @@ import ProductImage from './ProductImage.astro';
       modules: [Pagination, Navigation, Autoplay],
       slidesPerView: 1,
       spaceBetween: 20,
+      touchStartPreventDefault: false,
+      touchMoveStopPropagation: false,
       autoplay: { delay: 3500, disableOnInteraction: false },
       pagination: { el: '.product-pagination', clickable: true },
       navigation: { nextEl: '.product-next', prevEl: '.product-prev' },
@@ -175,6 +177,10 @@ import ProductImage from './ProductImage.astro';
   .product-swiper :global(.swiper-button-prev::after),
   .product-swiper :global(.swiper-button-next::after) {
     font-size: 1.2rem;
+  }
+
+  .product-swiper {
+    touch-action: pan-y pinch-zoom;
   }
 
   @media (max-width: 639px) {

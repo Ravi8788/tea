@@ -1,7 +1,20 @@
 const header = document.getElementById('main-header');
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenuClose = document.getElementById('mobile-menu-close');
 const mobileMenu = document.getElementById('mobile-menu');
 const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+function closeMobileMenu() {
+  mobileMenu?.classList.add('hidden');
+  mobileMenu?.classList.remove('flex');
+  mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+}
+
+function openMobileMenu() {
+  mobileMenu?.classList.remove('hidden');
+  mobileMenu?.classList.add('flex');
+  mobileMenuBtn?.setAttribute('aria-expanded', 'true');
+}
 
 // Sticky header style on scroll
 window.addEventListener('scroll', () => {
@@ -14,14 +27,16 @@ window.addEventListener('scroll', () => {
 
 // Mobile menu toggle
 mobileMenuBtn?.addEventListener('click', () => {
-  mobileMenu.classList.toggle('hidden');
-  mobileMenu.classList.toggle('flex');
+  if (mobileMenu?.classList.contains('hidden')) {
+    openMobileMenu();
+  } else {
+    closeMobileMenu();
+  }
 });
 
+mobileMenuClose?.addEventListener('click', closeMobileMenu);
+
 // Close mobile menu on link click
-mobileLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.add('hidden');
-    mobileMenu.classList.remove('flex');
-  });
+mobileLinks.forEach((link) => {
+  link.addEventListener('click', closeMobileMenu);
 });
