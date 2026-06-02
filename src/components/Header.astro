@@ -49,18 +49,24 @@ function isActive(href: string) {
   .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
   .site-logo {
-    height: 3rem;
+    height: 2.35rem;
     width: auto;
-    max-width: min(78vw, 16.5rem);
+    max-width: min(62vw, 11rem);
     object-fit: contain;
     object-position: left center;
     filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.2));
     transition: filter 0.3s ease, transform 0.3s ease;
   }
+  @media (min-width: 480px) {
+    .site-logo {
+      height: 2.75rem;
+      max-width: min(70vw, 14rem);
+    }
+  }
   @media (min-width: 768px) {
     .site-logo {
-      height: 3.5rem;
-      max-width: 18.5rem;
+      height: 3rem;
+      max-width: min(78vw, 16.5rem);
     }
   }
   a:hover .site-logo {
@@ -80,7 +86,7 @@ function isActive(href: string) {
   }
 </style>
 
-<header id="main-header" class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-5">
+<header id="main-header" class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-12 py-3 sm:py-4 lg:py-5">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
 
     <!-- Logo -->

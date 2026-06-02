@@ -19,7 +19,7 @@ const addressLines = companyAddressFormatted.split('\n');
 ---
 
 <footer style="background: var(--page-bg-soft); border-top: 1px solid rgba(201,162,39,0.2);">
-  <div class="max-w-7xl mx-auto px-6 section-py pb-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 section-py pb-10">
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
 
@@ -164,5 +164,18 @@ const addressLines = companyAddressFormatted.split('\n');
     font-size: 0.82em;
     line-height: 1;
     letter-spacing: 0;
+  }
+
+  @media (max-width: 639px) {
+    .footer-copyright-line {
+      letter-spacing: 0.06em;
+      gap: 0.35rem 0.45rem;
+      font-size: 0.52rem;
+      line-height: 1.75;
+    }
+
+    .footer-copyright-dot {
+      display: none;
+    }
   }
 </style>

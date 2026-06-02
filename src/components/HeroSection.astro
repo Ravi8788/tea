@@ -9,7 +9,7 @@ import ProductImage from './ProductImage.astro';
 	<div class="home-hero-pattern mughal-texture" aria-hidden="true"></div>
 	<div class="home-hero-glow" aria-hidden="true"></div>
 
-	<div class="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-20 lg:pt-32 lg:pb-24 w-full">
+	<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-14 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24 w-full">
 		<!-- Brand strip (static — not repeated per slide) -->
 		<div class="home-hero-brand text-center lg:text-left mb-8 lg:mb-10 opacity-0">
 			<p class="label-text text-gold mb-2 tracking-[0.25em]">{company.brand.toUpperCase()}</p>
@@ -28,11 +28,11 @@ import ProductImage from './ProductImage.astro';
 									{product.badge}
 								</span>
 								{index === 0 ? (
-									<h1 class="font-cinzel font-bold text-dark text-2xl sm:text-3xl lg:text-4xl leading-snug mb-3 mt-4">
+									<h1 class="font-cinzel font-bold text-dark text-lg sm:text-2xl lg:text-4xl leading-snug mb-3 mt-3 sm:mt-4">
 										{product.name}
 									</h1>
 								) : (
-									<h2 class="font-cinzel font-bold text-dark text-2xl sm:text-3xl lg:text-4xl leading-snug mb-3 mt-4">
+									<h2 class="font-cinzel font-bold text-dark text-lg sm:text-2xl lg:text-4xl leading-snug mb-3 mt-3 sm:mt-4">
 										{product.name}
 									</h2>
 								)}
@@ -40,7 +40,7 @@ import ProductImage from './ProductImage.astro';
 								<p class="font-poppins text-sm text-dark/70 leading-relaxed mb-5 max-w-lg mx-auto lg:mx-0 line-clamp-3 lg:line-clamp-none">
 									{product.description}
 								</p>
-								<ul class="grid grid-cols-2 gap-x-3 gap-y-1.5 mb-6 max-w-md mx-auto lg:mx-0 text-left">
+								<ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-1.5 mb-6 max-w-md mx-auto lg:mx-0 text-left">
 									{product.highlights.map((h) => (
 										<li class="flex items-start gap-2 font-poppins text-xs text-dark/80">
 											<span class="text-gold flex-shrink-0">✦</span>
@@ -152,10 +152,18 @@ import ProductImage from './ProductImage.astro';
 <style>
 	.home-hero {
 		position: relative;
-		min-height: 100svh;
+		min-height: auto;
 		display: flex;
 		align-items: center;
 		overflow: hidden;
+		padding-bottom: 3rem;
+	}
+
+	@media (min-width: 768px) {
+		.home-hero {
+			min-height: 100svh;
+			padding-bottom: 0;
+		}
 	}
 
 	.home-hero-bg {
@@ -178,8 +186,15 @@ import ProductImage from './ProductImage.astro';
 	}
 
 	.home-hero-slide {
-		min-height: min(560px, calc(100svh - 200px));
-		gap: 1.5rem;
+		min-height: auto;
+		gap: 1rem;
+	}
+
+	@media (min-width: 768px) {
+		.home-hero-slide {
+			min-height: min(560px, calc(100svh - 200px));
+			gap: 1.5rem;
+		}
 	}
 
 	@media (min-width: 1024px) {
@@ -200,22 +215,24 @@ import ProductImage from './ProductImage.astro';
 	.home-hero-image-frame {
 		width: 100%;
 		max-width: 100%;
-		height: min(420px, 48vh);
-		min-height: 280px;
+		height: min(220px, 34vh);
+		min-height: 180px;
 		margin: 0 auto;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		background: transparent;
 		border: none;
-		box-shadow: 0 20px 50px rgba(201, 162, 39, 0.15);
+		box-shadow: 0 12px 32px rgba(201, 162, 39, 0.12);
 		transition: box-shadow 0.35s ease;
 		overflow: hidden;
 	}
 
 	@media (min-width: 640px) {
 		.home-hero-image-frame {
-			height: min(520px, 58vh);
+			height: min(320px, 42vh);
+			min-height: 240px;
+			box-shadow: 0 20px 50px rgba(201, 162, 39, 0.15);
 		}
 	}
 
@@ -345,5 +362,34 @@ import ProductImage from './ProductImage.astro';
 		background: rgba(201, 162, 39, 0.15);
 		border-color: #c9a227;
 		color: #c9a227;
+	}
+
+	@media (max-width: 639px) {
+		.home-hero-brand p:last-child {
+			font-size: 0.72rem;
+			line-height: 1.5;
+		}
+
+		.home-hero-swiper :global(.home-hero-dot) {
+			font-size: 0;
+			width: 10px;
+			height: 10px;
+			min-width: 10px;
+			padding: 0;
+			border-radius: 50%;
+		}
+
+		.home-hero-swiper :global(.home-hero-dot.swiper-pagination-bullet-active) {
+			width: 28px;
+			border-radius: 999px;
+		}
+
+		.home-hero-pagination {
+			gap: 0.35rem !important;
+		}
+
+		.home-hero-scroll {
+			display: none;
+		}
 	}
 </style>

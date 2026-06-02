@@ -1,0 +1,54 @@
+/* =====================
+   MOBILE RESPONSIVE FIXES
+   ===================== */
+
+@media (max-width: 767px) {
+  :root {
+    --section-py: clamp(2.75rem, 7vh, 4.5rem);
+  }
+
+  .text-display {
+    font-size: clamp(1.65rem, 6.5vw, 2.15rem);
+    line-height: 1.2;
+  }
+
+  .text-hero {
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+  }
+
+  .label-text {
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+  }
+
+  .btn-gold,
+  .btn-outline {
+    padding: 12px 20px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .loading-logo {
+    width: min(88vw, 300px);
+  }
+
+  .footer-logo {
+    width: min(100%, 220px);
+  }
+}
+
+@media (max-width: 639px) {
+  .section-py {
+    padding-top: clamp(2.5rem, 6vh, 3.5rem);
+    padding-bottom: clamp(2.5rem, 6vh, 3.5rem);
+  }
+
+  .max-w-7xl.px-6,
+  .max-w-6xl.px-6,
+  .max-w-5xl.px-6,
+  .max-w-4xl.px-6,
+  .max-w-3xl.px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

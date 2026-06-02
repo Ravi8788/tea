@@ -199,13 +199,13 @@ const stats = [
       <div class="absolute inset-0 mughal-texture about-hero-pattern"></div>
 
       <!-- Breadcrumb -->
-      <nav class="about-breadcrumb absolute z-20 left-6 md:left-8 lg:left-12 font-poppins text-xs reveal" aria-label="Breadcrumb">
+      <nav class="about-breadcrumb absolute z-20 left-4 sm:left-6 md:left-8 lg:left-12 font-poppins text-xs reveal" aria-label="Breadcrumb">
         <a href="/" class="hover:text-gold transition-colors duration-300 text-dark/45">Home</a>
         <span class="mx-2 text-dark/25">/</span>
         <span style="color: #C9A227;">About Us</span>
       </nav>
 
-      <div class="relative z-10 w-full max-w-5xl mx-auto px-6 text-center reveal">
+      <div class="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 text-center reveal">
         <p class="label-text text-gold mb-4 md:mb-5">About Us</p>
         <h1 class="font-cinzel-deco about-hero-title font-black text-gold-gradient mb-5 md:mb-6 leading-tight">
           Krushnai Amrutulya
@@ -637,11 +637,14 @@ const stats = [
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 280px;
+    min-height: 300px;
+    padding: 5.5rem 0 2.5rem;
   }
   @media (min-width: 768px) {
     .about-hero {
       height: 420px;
+      min-height: 0;
+      padding: 0;
     }
   }
   .about-hero-bg {
@@ -667,8 +670,8 @@ const stats = [
     }
   }
   .about-hero-title {
-    font-size: clamp(2rem, 5.5vw, 3.75rem);
-    line-height: 1.1;
+    font-size: clamp(1.65rem, 7vw, 3.75rem);
+    line-height: 1.15;
   }
 
   .founder-image-wrap {
