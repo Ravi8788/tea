@@ -19,6 +19,12 @@ onAppReady(() => {
       { y: isMobile ? 16 : 32, opacity: 0 },
       { y: 0, opacity: 1, duration: isMobile ? 0.6 : 0.85, ease: 'power3.out' },
       '-=0.35',
+    )
+    .fromTo(
+      '.home-hero-video-wrap',
+      { y: 16, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.65, ease: 'power3.out' },
+      '-=0.25',
     );
 
   if (!isMobile) {

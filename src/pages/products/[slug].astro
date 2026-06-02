@@ -10,6 +10,7 @@ import {
   breadcrumbSchema,
   organizationSchema,
   productSchema,
+  combineSchemas,
 } from '../../lib/seo';
 
 export function getStaticPaths() {
@@ -21,7 +22,7 @@ const product = getProduct(slug!);
 if (!product) return Astro.redirect('/products');
 
 const others = products.filter(p => p.slug !== slug);
-const seo = productSeo(product.name, product.description, product.slug);
+const seo = productSeo(product.name, product.description, product.slug, product.tagline);
 ---
 
 <BaseLayout
@@ -31,7 +32,7 @@ const seo = productSeo(product.name, product.description, product.slug);
   ogImage={product.image}
   ogType="product"
   canonicalPath={`/products/${product.slug}/`}
-  schema={[
+  schema={combineSchemas(
     organizationSchema(),
     productSchema(product),
     breadcrumbSchema([
@@ -39,7 +40,7 @@ const seo = productSeo(product.name, product.description, product.slug);
       { name: 'Products', path: '/products/' },
       { name: product.name, path: `/products/${product.slug}/` },
     ]),
-  ]}
+  )}
 >
   <Header />
   <main>

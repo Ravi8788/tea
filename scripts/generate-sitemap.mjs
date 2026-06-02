@@ -14,12 +14,12 @@ const lastmod = new Date().toISOString().slice(0, 10);
 const pages = [
   { loc: '/', changefreq: 'weekly', priority: '1.0' },
   { loc: '/about/', changefreq: 'monthly', priority: '0.9' },
-  { loc: '/products/', changefreq: 'weekly', priority: '0.9' },
-  { loc: '/products/jaggery-cardamom/', changefreq: 'monthly', priority: '0.8' },
-  { loc: '/products/sugar-cardamom/', changefreq: 'monthly', priority: '0.8' },
-  { loc: '/products/rose-tea/', changefreq: 'monthly', priority: '0.8' },
-  { loc: '/products/jaggery-basundi/', changefreq: 'monthly', priority: '0.8' },
-  { loc: '/contact/', changefreq: 'monthly', priority: '0.8' },
+  { loc: '/products/', changefreq: 'weekly', priority: '0.95' },
+  { loc: '/products/jaggery-cardamom/', changefreq: 'monthly', priority: '0.85' },
+  { loc: '/products/sugar-cardamom/', changefreq: 'monthly', priority: '0.85' },
+  { loc: '/products/rose-tea/', changefreq: 'monthly', priority: '0.85' },
+  { loc: '/products/jaggery-basundi/', changefreq: 'monthly', priority: '0.85' },
+  { loc: '/contact/', changefreq: 'monthly', priority: '0.85' },
 ];
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>

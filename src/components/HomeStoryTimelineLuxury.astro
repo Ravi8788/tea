@@ -1,0 +1,149 @@
+---
+const milestones = [
+  {
+    year: '2022',
+    phase: 'The Idea',
+    title: 'A Vision Takes Shape',
+    desc: 'Inspired by authentic Rajasthani tea traditions, we conceptualized a premium instant chai premix that keeps heritage taste intact with modern convenience.',
+  },
+  {
+    year: '2023',
+    phase: 'Launch',
+    title: 'Shree Krishna Enterprises Founded',
+    desc: 'Krushnai Amrutulya began with a clear commitment to quality manufacturing, authentic recipes, and reliable nationwide supply.',
+  },
+  {
+    year: '2023-24',
+    phase: 'Growth',
+    title: 'All India Expansion',
+    desc: 'With strong product consistency and partner trust, we expanded across 28+ states and served 500+ happy customers.',
+  },
+  {
+    year: '2025 Onwards',
+    phase: 'Scale',
+    title: 'Premium Network Building',
+    desc: 'We continue growing our dealer ecosystem with faster dispatch, stronger support, and refined chai experiences for Bharat.',
+  },
+];
+---
+
+<section id="home-story" class="section-py home-story-timeline relative overflow-hidden">
+  <div class="home-story-texture absolute inset-0 mughal-texture" aria-hidden="true"></div>
+  <div class="home-story-overlay absolute inset-0" aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+      <div class="reveal">
+        <p class="label-text text-gold mb-5">Our Story</p>
+        <h2 class="font-cinzel font-bold leading-[1.05] mb-7 home-story-heading">
+          Rooted in Rajasthan,
+          <span class="text-gold-gradient block">Brewed for Bharat</span>
+        </h2>
+        <div class="home-story-divider mb-8"></div>
+        <div class="space-y-5 font-poppins text-sm md:text-base leading-relaxed text-dark/80 max-w-xl">
+          <p>
+            Every great brand begins with an honest memory. Ours begins with the aroma of roadside chai in Rajasthan:
+            bold tea notes, warm spices, and the comfort of a familiar ritual.
+          </p>
+          <p>
+            Krushnai Amrutulya transforms that nostalgia into a dependable premium premix, crafted for homes, hotels,
+            offices, and tea businesses who want authentic flavor with consistent quality.
+          </p>
+        </div>
+        <a href="/about" class="btn-outline inline-flex mt-8 text-xs px-8 py-3.5">
+          Explore Full Journey →
+        </a>
+      </div>
+
+      <div class="reveal-right">
+        <div class="home-story-track">
+          {milestones.map((item) => (
+            <article class="home-story-item">
+              <div class="home-story-dot" aria-hidden="true"></div>
+              <div class="home-story-copy">
+                <p class="home-story-meta">{item.year} — {item.phase}</p>
+                <h3 class="font-cinzel font-semibold text-lg text-dark mb-2 leading-tight">{item.title}</h3>
+                <p class="font-poppins text-sm leading-relaxed text-dark/70">{item.desc}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-story-timeline {
+    background: #f4f0e7;
+  }
+
+  .home-story-texture {
+    opacity: 0.22;
+  }
+
+  .home-story-overlay {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.25) 100%);
+    pointer-events: none;
+  }
+
+  .home-story-heading {
+    font-size: clamp(2.2rem, 5.8vw, 4.6rem);
+    color: #1e1e1e;
+    text-transform: uppercase;
+  }
+
+  .home-story-divider {
+    width: 72px;
+    height: 2px;
+    background: linear-gradient(90deg, #c9a227, rgba(201, 162, 39, 0.2));
+  }
+
+  .home-story-track {
+    border-left: 1px solid rgba(201, 162, 39, 0.34);
+    padding-left: 1.4rem;
+    display: grid;
+    gap: 1.45rem;
+  }
+
+  .home-story-item {
+    position: relative;
+    padding-left: 0.45rem;
+  }
+
+  .home-story-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    left: -1.83rem;
+    top: 0.52rem;
+    background: #c9a227;
+    box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.16);
+  }
+
+  .home-story-meta {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(201, 162, 39, 0.95);
+    margin-bottom: 0.55rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 767px) {
+    .home-story-heading {
+      font-size: clamp(1.85rem, 10vw, 2.8rem);
+    }
+
+    .home-story-track {
+      padding-left: 1.05rem;
+      gap: 1.2rem;
+    }
+
+    .home-story-dot {
+      left: -1.45rem;
+    }
+  }
+</style>

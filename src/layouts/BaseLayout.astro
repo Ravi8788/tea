@@ -50,6 +50,10 @@ const schemaBlocks = schema
 	<meta name="googlebot" content={robotsContent} />
 	<meta name="theme-color" content="#C9A227" />
 	<meta name="format-detection" content="telephone=yes" />
+	<meta name="contact" content={company.phoneDisplay} />
+	<meta name="coverage" content="India" />
+	<meta name="distribution" content="global" />
+	<meta name="rating" content="general" />
 
 	<!-- Geo / Local SEO -->
 	<meta name="geo.region" content="IN-RJ" />
@@ -66,9 +70,15 @@ const schemaBlocks = schema
 	<meta property="og:description" content={description} />
 	<meta property="og:url" content={canonical} />
 	<meta property="og:image" content={ogImageAbsolute} />
-	<meta property="og:image:alt" content={`${company.brand} — Premium Jaggery Tea Premix`} />
+	<meta property="og:image:secure_url" content={ogImageAbsolute} />
+	<meta property="og:image:alt" content={`${company.brand} — Premium Jaggery Tea Premix from Rajasthan`} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
 	<meta property="og:type" content={ogType} />
 	<meta property="og:locale" content="en_IN" />
+	{ogType === 'product' && (
+		<meta property="product:brand" content={company.brand} />
+	)}
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />

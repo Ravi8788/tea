@@ -22,6 +22,10 @@ import {
 	breadcrumbSchema,
 	itemListSchema,
 	organizationSchema,
+	productsCollectionPageSchema,
+	faqSchema,
+	homeFaqItems,
+	combineSchemas,
 } from '../lib/seo';
 
 const heroCollage = [
@@ -46,14 +50,16 @@ const whatsappUrl = company.whatsappUrl;
 	description={seoPages.products.description}
 	keywords={seoPages.products.keywords}
 	canonicalPath="/products/"
-	schema={[
+	schema={combineSchemas(
 		organizationSchema(),
+		productsCollectionPageSchema(),
 		itemListSchema(products),
 		breadcrumbSchema([
 			{ name: 'Home', path: '/' },
 			{ name: 'Products', path: '/products/' },
 		]),
-	]}
+		faqSchema(homeFaqItems.slice(0, 3)),
+	)}
 >
 	<Header />
 	<main class="products-page overflow-x-hidden">

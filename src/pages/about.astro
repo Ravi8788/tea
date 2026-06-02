@@ -10,6 +10,7 @@ import {
   breadcrumbSchema,
   organizationSchema,
   localBusinessSchema,
+  combineSchemas,
 } from '../lib/seo';
 
 const introBullets = [
@@ -178,7 +179,7 @@ const stats = [
   description={seoPages.about.description}
   keywords={seoPages.about.keywords}
   canonicalPath="/about/"
-  schema={[
+  schema={combineSchemas(
     organizationSchema(),
     localBusinessSchema(),
     aboutPageSchema(),
@@ -186,7 +187,7 @@ const stats = [
       { name: 'Home', path: '/' },
       { name: 'About Us', path: '/about/' },
     ]),
-  ]}
+  )}
 >
 
   <Header />

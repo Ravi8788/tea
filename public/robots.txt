@@ -1,7 +1,9 @@
 User-agent: *
 Allow: /
 
-# Block build artifacts if ever exposed
+Disallow: /404.html
 Disallow: /assets/*.map
 
+# Krushnai Amrutulya — https://krushnaiamrutulya.com
 Sitemap: https://krushnaiamrutulya.com/sitemap.xml
+Host: https://krushnaiamrutulya.com

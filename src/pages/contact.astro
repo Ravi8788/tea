@@ -4,7 +4,13 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { company, companyAddressFormatted, mapsEmbedUrl, companyTelUrl } from '../data/company';
 import { seoPages } from '../data/seo';
-import { breadcrumbSchema, contactPageSchema, organizationSchema } from '../lib/seo';
+import {
+  breadcrumbSchema,
+  contactPageSchema,
+  organizationSchema,
+  localBusinessSchema,
+  combineSchemas,
+} from '../lib/seo';
 
 const addressLines = companyAddressFormatted.split('\n');
 ---
@@ -14,14 +20,15 @@ const addressLines = companyAddressFormatted.split('\n');
   description={seoPages.contact.description}
   keywords={seoPages.contact.keywords}
   canonicalPath="/contact/"
-  schema={[
+  schema={combineSchemas(
     organizationSchema(),
+    localBusinessSchema(),
     contactPageSchema(),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Contact', path: '/contact/' },
     ]),
-  ]}
+  )}
 >
   <Header />
   <main>

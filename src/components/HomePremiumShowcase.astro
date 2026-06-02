@@ -1,0 +1,284 @@
+---
+import { company } from '../data/company';
+
+const features = [
+  { icon: '🍃', label: 'Premium Ingredients' },
+  { icon: '☕', label: 'Authentic Taste' },
+  { icon: '🛡️', label: 'Hygienically Processed' },
+  { icon: '⚡', label: 'Instant Preparation' },
+];
+
+const stats = [
+  { value: '2023', label: 'Established' },
+  { value: '100%', label: 'Quality Focused' },
+  { value: 'Premium', label: 'Tea Experience' },
+];
+---
+
+<section id="premium-showcase" class="section-py home-premium-showcase">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+      <div class="reveal order-2 lg:order-1">
+        <h2 class="home-premium-title font-cinzel font-bold text-gold-gradient leading-tight mb-4">
+          Modern Businesses
+        </h2>
+        <p class="home-premium-sub font-cinzel font-semibold text-gold uppercase tracking-wide mb-6">
+          Premium Taste. Instant Preparation. Consistent Quality.
+        </p>
+        <p class="font-poppins text-sm md:text-base leading-relaxed text-dark/75 mb-8 max-w-xl">
+          {company.brand} delivers the authentic richness of traditional Indian tea through premium tea premixes
+          carefully crafted for hotels, offices, cafes, restaurants, distributors and tea lovers. Every cup reflects
+          quality, hygiene, consistency and exceptional taste.
+        </p>
+
+        <div class="flex flex-col gap-3 mb-8">
+          <a href="/products" class="home-premium-btn-primary">
+            Explore Our Products
+          </a>
+          <a
+            href={company.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="home-premium-btn-secondary"
+          >
+            <span aria-hidden="true">💬</span>
+            Become Our Dealer Partner
+          </a>
+        </div>
+
+        <div class="home-premium-features">
+          {features.map((item) => (
+            <div class="home-premium-feature-item">
+              <span class="home-premium-feature-icon" aria-hidden="true">{item.icon}</span>
+              <span class="font-poppins text-sm font-medium text-dark/80">{item.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="home-premium-stats">
+          {stats.map((item) => (
+            <div class="home-premium-stat">
+              <p class="font-cinzel font-bold text-dark text-2xl md:text-3xl leading-none mb-1">{item.value}</p>
+              <p class="label-text text-gold text-[0.62rem]">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="reveal-right order-1 lg:order-2 relative">
+        <div class="home-premium-image-wrap">
+          <span class="home-premium-badge">
+            <span class="home-premium-badge-icon" aria-hidden="true">✓</span>
+            Trusted Brand
+          </span>
+          <img
+            src="/images/home/premium-showcase.jpg"
+            alt="Women in traditional Rajasthani attire showcasing Krushnai Amrutulya tea premix products"
+            class="home-premium-image"
+            width="900"
+            height="1120"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <div class="home-premium-float home-premium-float--top" aria-hidden="true">
+          <span>☕</span> Authentic Taste
+        </div>
+        <div class="home-premium-float home-premium-float--bottom" aria-hidden="true">
+          <span>⚡</span> Instant Preparation
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-premium-showcase {
+    background: #ffffff;
+  }
+
+  .home-premium-title {
+    font-size: clamp(2rem, 5.5vw, 3.6rem);
+    text-transform: uppercase;
+  }
+
+  .home-premium-sub {
+    font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+    line-height: 1.35;
+  }
+
+  .home-premium-btn-primary,
+  .home-premium-btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 420px;
+    padding: 0.95rem 1.4rem;
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .home-premium-btn-primary {
+    color: #fff;
+    background: linear-gradient(90deg, #c9a227 0%, #e8c96a 100%);
+    box-shadow: 0 8px 24px rgba(201, 162, 39, 0.28);
+  }
+
+  .home-premium-btn-secondary {
+    color: #1e1e1e;
+    background: #fff;
+    border: 1px solid rgba(201, 162, 39, 0.45);
+  }
+
+  .home-premium-btn-primary:hover,
+  .home-premium-btn-secondary:hover {
+    transform: translateY(-2px);
+  }
+
+  .home-premium-features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 1rem;
+    background: #f7f7f7;
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 1.5rem;
+    max-width: 520px;
+  }
+
+  .home-premium-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .home-premium-feature-icon {
+    width: 1.35rem;
+    text-align: center;
+    color: #c9a227;
+    flex-shrink: 0;
+  }
+
+  .home-premium-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    max-width: 520px;
+  }
+
+  .home-premium-stat {
+    text-align: left;
+  }
+
+  .home-premium-image-wrap {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(30, 30, 30, 0.14);
+    border: 1px solid rgba(201, 162, 39, 0.2);
+  }
+
+  .home-premium-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .home-premium-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 999px;
+    padding: 0.45rem 0.8rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #1e1e1e;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+
+  .home-premium-badge-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #c9a227;
+    color: #fff;
+    font-size: 0.62rem;
+  }
+
+  .home-premium-float {
+    position: absolute;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: #fff;
+    border-radius: 999px;
+    padding: 0.5rem 0.85rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #1e1e1e;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .home-premium-float span {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201, 162, 39, 0.15);
+    color: #c9a227;
+    font-size: 0.7rem;
+  }
+
+  .home-premium-float--top {
+    right: -8px;
+    top: 28%;
+  }
+
+  .home-premium-float--bottom {
+    right: 12px;
+    bottom: 12%;
+  }
+
+  @media (max-width: 1023px) {
+    .home-premium-float {
+      display: none;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .home-premium-stats {
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+    }
+
+    .home-premium-features {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
