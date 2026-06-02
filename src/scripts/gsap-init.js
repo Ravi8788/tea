@@ -46,10 +46,11 @@ function initScrollAnimations() {
 	document.querySelectorAll('.reveal-left').forEach((el) => {
 		gsap.fromTo(
 			el,
-			{ opacity: 0, x: -xReveal },
+			mobile ? { opacity: 0, y: yReveal } : { opacity: 0, x: -xReveal },
 			{
 				opacity: 1,
 				x: 0,
+				y: 0,
 				duration,
 				ease: 'power2.out',
 				scrollTrigger: { trigger: el, start, toggleActions: 'play none none none' },
@@ -60,10 +61,11 @@ function initScrollAnimations() {
 	document.querySelectorAll('.reveal-right').forEach((el) => {
 		gsap.fromTo(
 			el,
-			{ opacity: 0, x: xReveal },
+			mobile ? { opacity: 0, y: yReveal } : { opacity: 0, x: xReveal },
 			{
 				opacity: 1,
 				x: 0,
+				y: 0,
 				duration,
 				ease: 'power2.out',
 				scrollTrigger: { trigger: el, start, toggleActions: 'play none none none' },

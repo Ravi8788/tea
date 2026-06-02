@@ -73,6 +73,20 @@
   .home-hero-nav {
     display: none;
   }
+
+  .dealer-program .grid {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dealer-cta-card {
+    overflow: hidden;
+  }
+
+  .reveal-left,
+  .reveal-right {
+    transform: translateY(24px);
+  }
 }
 
 @media (min-width: 640px) and (max-width: 767px) {

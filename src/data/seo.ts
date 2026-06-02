@@ -6,7 +6,7 @@ const phone = company.phoneDisplay;
 export const seoPages = {
 	home: {
 		title: `${brand} | Premium Jaggery Tea Premix Manufacturer Rajasthan`,
-		description: `${brand} — FSSAI certified premium jaggery tea premix from Sojat, Rajasthan. Jaggery Cardamom, Rose Tea, Jaggery Basundi & more. Bulk supply for hotels, cafés & dealers. Call ${phone}. Pan-India delivery.`,
+		description: `${brand} — FSSAI certified premium jaggery tea premix from Sojat City, Pali, Rajasthan. Jaggery Cardamom, Rose Tea, Jaggery Basundi & more. Bulk supply for hotels, cafés & dealers. Call ${phone}. Pan-India delivery.`,
 		keywords: [
 			'Krushnai Amrutulya',
 			'jaggery tea premix',
@@ -16,19 +16,20 @@ export const seoPages = {
 			'tea premix bulk order',
 			'jaggery cardamom tea',
 			'dealer tea premix',
-			'Shree Krishna Enterprises Sojat',
+			'Shree Krishna Enterprises Sojat City',
+			'Sojat City tea premix',
 			'FSSAI tea premix',
 		].join(', '),
 	},
 	about: {
 		title: `About ${brand} | Heritage Jaggery Tea Premix Brand India`,
-		description: `Learn the story of ${brand} by ${company.name} — premium Rajasthani jaggery chai premix since 2023. FSSAI certified manufacturing in Sojat, Pali. Authentic taste, hygienic process, pan-India supply.`,
+		description: `Learn the story of ${brand} by ${company.name} — premium Rajasthani jaggery chai premix since 2023. FSSAI certified manufacturing in Sojat City, Pali, Rajasthan. Authentic taste, hygienic process, pan-India supply.`,
 		keywords: [
 			`about ${brand}`,
 			'tea premix manufacturer Rajasthan',
 			'jaggery chai brand India',
 			'Shree Krishna Enterprises',
-			'Sojat tea company',
+			'Sojat City tea company',
 			'FSSAI certified tea premix',
 		].join(', '),
 	},
@@ -46,7 +47,7 @@ export const seoPages = {
 	},
 	contact: {
 		title: `Contact ${brand} | Bulk Orders & Dealer Enquiries ${phone}`,
-		description: `Contact ${brand} for bulk tea premix orders and dealer partnerships. ${company.name}, Sojat, Pali, Rajasthan. WhatsApp or call ${phone}. Mon–Sat 9 AM–6 PM IST.`,
+		description: `Contact ${brand} for bulk tea premix orders and dealer partnerships. ${company.name}, Sojat City, Pali, Rajasthan – 306104. WhatsApp or call ${phone}. Mon–Sat 9 AM–6 PM IST.`,
 		keywords: [
 			`contact ${brand}`,
 			'tea premix bulk order',

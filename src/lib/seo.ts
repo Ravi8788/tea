@@ -24,7 +24,8 @@ export const defaultKeywords = [
 	'hotel tea premix supplier',
 	'FSSAI tea premix',
 	'bulk tea premix India',
-	'Sojat Pali Rajasthan tea',
+	'Sojat City Pali Rajasthan tea',
+	'Sojat tea premix',
 	'tea premix dealer',
 ].join(', ');
 
@@ -39,7 +40,7 @@ export function organizationSchema() {
 		logo: absoluteUrl(company.logoPath),
 		image: [absoluteUrl('/og-image.jpg'), absoluteUrl(company.logoPath)],
 		description:
-			'Premium jaggery tea premix manufacturer from Sojat, Rajasthan, India. FSSAI certified blends for hotels, restaurants, cafés, distributors and retail.',
+			'Premium jaggery tea premix manufacturer from Sojat City, Pali, Rajasthan, India. FSSAI certified blends for hotels, restaurants, cafés, distributors and retail.',
 		email: company.email,
 		telephone: company.phoneDisplay,
 		foundingDate: '2023',
@@ -76,7 +77,7 @@ export function localBusinessSchema() {
 		image: absoluteUrl('/og-image.jpg'),
 		logo: absoluteUrl(company.logoPath),
 		description:
-			'Manufacturer and supplier of premium jaggery tea premix in Sojat, Pali, Rajasthan. Bulk orders and dealer partnerships across India.',
+			'Manufacturer and supplier of premium jaggery tea premix in Sojat City, Pali, Rajasthan. Bulk orders and dealer partnerships across India.',
 		telephone: company.phoneDisplay,
 		email: company.email,
 		priceRange: '₹₹',
@@ -169,7 +170,7 @@ export const homeFaqItems = [
 	{
 		question: 'What is Krushnai Amrutulya tea premix?',
 		answer:
-			'Krushnai Amrutulya is a premium FSSAI certified jaggery tea premix brand manufactured by Shree Krishna Enterprises in Sojat, Rajasthan. Our blends deliver authentic Rajasthani chai taste with instant preparation.',
+			'Krushnai Amrutulya is a premium FSSAI certified jaggery tea premix brand manufactured by Shree Krishna Enterprises in Sojat City, Pali, Rajasthan. Our blends deliver authentic Rajasthani chai taste with instant preparation.',
 	},
 	{
 		question: 'Do you supply tea premix in bulk for hotels and restaurants?',

@@ -13,8 +13,8 @@ export const company = {
 	designerCredit: 'Impulse Macro Innovation Pvt Ltd',
 	address: {
 		line1: 'Ward No. 29, Ganga Petrol Pump Ke Piche',
-		line2: 'Basni Road, Sojat',
-		city: 'Sojat',
+		line2: 'Basni Road',
+		city: 'Sojat City',
 		district: 'Pali',
 		state: 'Rajasthan',
 		pincode: '306104',
@@ -33,6 +33,6 @@ export const companyAddressSingleLine =
 	`${company.address.line1}, ${company.address.line2}, ${company.address.city}, ${company.address.district}, ${company.address.state} – ${company.address.pincode}`;
 
 export const mapsEmbedUrl =
-	'https://maps.google.com/maps?q=Sojat,Pali,Rajasthan+306104&output=embed&z=14';
+	'https://maps.google.com/maps?q=Sojat+City,Pali,Rajasthan+306104&output=embed&z=14';
 
 export const companyTelUrl = `tel:+91${company.phone}`;

@@ -302,7 +302,7 @@ d:\tea\
 | Brand | Krushnai Amrutulya |
 | Company | Shree Krishna Enterprises |
 | FSSAI | 12225036000072 |
-| Address | Ward No. 29, Ganga Petrol Pump Ke Piche, Basni Road, Sojat, Pali, Rajasthan – 306104 |
+| Address | Ward No. 29, Ganga Petrol Pump Ke Piche, Basni Road, Sojat City, Pali, Rajasthan – 306104 |
 | Designer credit | Impulse Macro Innovation Pvt Ltd |
 
 ---
@@ -347,7 +347,7 @@ The site is fully SEO-ready for Google and social sharing.
 | JSON-LD schema | Organization, LocalBusiness, Product, BreadcrumbList |
 | sitemap.xml | Auto-generated on every `npm run build` |
 | robots.txt | Allows indexing, points to sitemap |
-| Geo tags | Local SEO for Sojat, Rajasthan |
+| Geo tags | Local SEO for Sojat City, Pali, Rajasthan |
 | site.webmanifest | Mobile browser branding |
 | 404 noindex | Error page excluded from search |
 
