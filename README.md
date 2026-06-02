@@ -3,7 +3,8 @@
 Luxury static website for **Krushnai Amrutulya** (Shree Krishna Enterprises) — premium jaggery tea premix from Rajasthan, India.
 
 **Production domain:** [https://krushnaiamrutulya.com](https://krushnaiamrutulya.com)  
-**Hosting:** Hostinger shared hosting (Apache, static files)
+**Hosting:** Hostinger shared hosting (Apache, static files)  
+**Mobile-first:** Native scroll on phones, lighter animations, autoplay hero video + slideshow tested for mobile.
 
 ---
 
@@ -68,24 +69,14 @@ npm run package:hostinger
 
 Edit **`src/data/company.ts`** (one file controls most business info):
 
-| Field | Current | What to set |
-|-------|---------|-------------|
-| `whatsappUrl` | `https://wa.me/91XXXXXXXXXX` | Real WhatsApp link, e.g. `https://wa.me/919876543210` |
-| `phone` | `9876543210` | 10-digit mobile (no +91) |
-| `phoneDisplay` | `+91 98765 43210` | How the number appears on site |
-| `email` | `info@krushnaiamrutulya.com` | Your business email |
-| `contactFormAction` | Formspree placeholder | Your Formspree form URL (see below) |
+| Field | What to set |
+|-------|-------------|
+| `whatsappUrl` | WhatsApp link (e.g. `https://wa.me/918554857776`) |
+| `phone` | 10-digit mobile (no +91) |
+| `phoneDisplay` | How the number appears on site |
+| `email` | Business email |
 
-After editing, run `npm run build` again before uploading.
-
-### Contact form (Formspree — free)
-
-The contact page uses [Formspree](https://formspree.io) so messages go to your email without PHP on the server.
-
-1. Sign up at [https://formspree.io](https://formspree.io)
-2. Create a new form → copy the form URL (e.g. `https://formspree.io/f/abcxyz`)
-3. Paste it into `contactFormAction` in `src/data/company.ts`
-4. Rebuild and redeploy
+After editing, run `npm run build:hostinger` before uploading.
 
 ### Domain in config
 
@@ -138,7 +129,21 @@ Update DNS at your registrar to Netlify's nameservers or A/CNAME records.
 
 ---
 
-## Hostinger deployment guide
+## Hostinger deployment guide (primary hosting)
+
+### Mobile behaviour on live site
+
+The site is tuned for **phones first** on Hostinger:
+
+| Feature | Mobile behaviour |
+|---------|------------------|
+| Scroll | **Native touch scroll** (Lenis smooth scroll disabled on phones — faster, no jank) |
+| Animations | Shorter, lighter GSAP reveals |
+| Hero | Banner slideshow + autoplay video below (muted, playsinline) |
+| Loading screen | Faster on mobile (~1s) |
+| Reduced motion | Respects system “reduce motion” setting |
+
+Always test on a real phone after upload: hero slideshow swipe, video autoplay, WhatsApp buttons, product carousel.
 
 ### What you need from Hostinger
 
@@ -151,28 +156,30 @@ Update DNS at your registrar to Netlify's nameservers or A/CNAME records.
 ```bash
 cd d:\tea
 npm install
-npm run build
+npm run build:hostinger
 ```
 
-This creates the **`dist/`** folder with everything Hostinger needs:
+`build:hostinger` builds the site **and verifies** required Hostinger files (`.htaccess`, video, sitemap, pages).
+
+This creates the **`dist/`** folder — upload **all contents** to `public_html`:
 
 ```
 dist/
-├── index.html              ← Home page
+├── index.html
 ├── about/index.html
 ├── contact/index.html
 ├── products/index.html
-├── products/jaggery-cardamom/index.html
+├── products/*/index.html
 ├── 404.html
-├── .htaccess               ← HTTPS, caching, clean URLs
+├── .htaccess               ← HTTPS, routes, caching, video MIME
 ├── robots.txt
 ├── sitemap.xml
-├── og-image.jpg
+├── videos/advertisment.mp4 ← Homepage hero video
 ├── assets/                 ← CSS & JavaScript
-└── images/                 ← Logo, products, founder, ingredients
+└── images/                 ← Logo, hero banners, products
 ```
 
-Optional — create a zip for easier upload:
+Optional zip for File Manager upload:
 
 ```bash
 npm run package:hostinger
@@ -241,17 +248,17 @@ Open these URLs:
 - [https://krushnaiamrutulya.com/products/](https://krushnaiamrutulya.com/products/)
 - [https://krushnaiamrutulya.com/contact/](https://krushnaiamrutulya.com/contact/)
 
-**Checklist:**
+**Checklist (desktop + phone):**
 
-- [ ] Home page loads with logo and hero
-- [ ] All navigation links work
-- [ ] Product pages open
-- [ ] Images load (logo, founder, ingredients, products)
-- [ ] WhatsApp buttons open correct chat (after you set the real number)
-- [ ] Contact form submits (after Formspree is configured)
-- [ ] Footer copyright line visible at bottom
-- [ ] Padlock icon in browser (HTTPS active)
-- [ ] Mobile layout looks correct
+- [ ] Home: banner slideshow swipes / auto-advances
+- [ ] Home: video plays below slideshow (muted)
+- [ ] Premium “Modern Businesses” section + Our Story timeline visible
+- [ ] Product carousel swipes on mobile
+- [ ] WhatsApp / Call links work (`+91 85548 57776`)
+- [ ] All pages open (`/about/`, `/products/`, `/contact/`)
+- [ ] `.htaccess` uploaded (show hidden files in File Manager)
+- [ ] HTTPS padlock active
+- [ ] Scroll feels smooth on phone (no stuck sections)
 
 ---
 
@@ -314,8 +321,11 @@ Hard refresh with `Ctrl + Shift + R`. Check `assets/` and `images/` exist in `pu
 ### HTTPS not working
 Install SSL in hPanel first. Wait 10–15 minutes after activation.
 
-### Contact form does not send email
-Replace the Formspree placeholder URL in `company.ts` and rebuild.
+### Video does not play on phone
+Ensure `videos/advertisment.mp4` is inside `public_html/videos/`. Video is muted for autoplay (required by browsers).
+
+### Animations feel slow or sticky on mobile
+Clear cache. Site uses native scroll on phones by design — re-upload latest `dist/assets/` JS files.
 
 ### Old content still showing
 Clear browser cache or purge cache in hPanel → **Cache Manager**.
@@ -373,11 +383,11 @@ Submit: `https://krushnaiamrutulya.com/sitemap.xml`
 ## Quick deploy cheat sheet
 
 ```bash
-# 1. Update src/data/company.ts (WhatsApp, phone, email, Formspree)
-# 2. Build
-npm run build
+# 1. Update src/data/company.ts if needed
+# 2. Build + verify
+npm run build:hostinger
 
-# 3. Upload dist/* → Hostinger public_html
+# 3. Upload ALL files inside dist/ → Hostinger public_html
 # 4. Enable SSL in hPanel
-# 5. Test https://krushnaiamrutulya.com
+# 5. Test on phone + desktop: https://krushnaiamrutulya.com
 ```

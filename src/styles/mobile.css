@@ -143,3 +143,66 @@
     padding-right: 1rem;
   }
 }
+
+/* =====================
+   MOBILE SCROLL & ANIMATION PERFORMANCE
+   (Hostinger / phones — native scroll, GPU-friendly)
+   ===================== */
+html.native-scroll {
+  scroll-behavior: auto;
+}
+
+html.native-scroll body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+}
+
+@media (max-width: 767px) {
+  .home-hero-swiper,
+  .home-hero-video-frame,
+  .product-swiper,
+  .home-premium-image-wrap {
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  #loading-screen {
+    gap: 16px;
+  }
+
+  #loading-bar-track {
+    width: min(70vw, 200px);
+  }
+
+  .home-premium-float {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .stagger-child,
+  .home-hero-brand,
+  .home-hero-swiper,
+  .home-hero-video-wrap,
+  .home-hero-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #loading-screen {
+    display: none !important;
+  }
+}
