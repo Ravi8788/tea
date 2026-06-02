@@ -22,8 +22,8 @@ import ProductImage from './ProductImage.astro';
 			<div class="swiper-wrapper">
 				{products.map((product, index) => (
 					<div class="swiper-slide">
-						<div class="home-hero-slide grid grid-cols-1 items-center">
-							<div class="home-hero-slide-copy order-2 lg:order-1 text-center lg:text-left">
+						<div class="home-hero-slide grid grid-cols-1 items-stretch lg:items-center w-full">
+							<div class="home-hero-slide-copy order-2 lg:order-1 w-full text-center lg:text-left">
 								<span class={`home-hero-badge home-hero-badge--${product.badgeVariant}`}>
 									{product.badge}
 								</span>
@@ -75,9 +75,9 @@ import ProductImage from './ProductImage.astro';
 				))}
 			</div>
 
-			<div class="home-hero-controls flex flex-col sm:flex-row items-center justify-between gap-6 mt-10 lg:mt-12">
+			<div class="home-hero-controls flex flex-col items-center gap-4 mt-8 sm:mt-10 lg:mt-12">
 				<div class="home-hero-pagination flex flex-wrap justify-center gap-2"></div>
-				<div class="flex items-center gap-3">
+				<div class="home-hero-nav flex items-center gap-3">
 					<button type="button" class="home-hero-prev" aria-label="Previous product">←</button>
 					<button type="button" class="home-hero-next" aria-label="Next product">→</button>
 				</div>
@@ -105,16 +105,20 @@ import ProductImage from './ProductImage.astro';
 		const el = document.querySelector('.home-hero-swiper');
 		if (!el || el.dataset.swiperInit === 'true') return;
 
+		const isMobile = window.matchMedia('(max-width: 767px)').matches;
+		const productNames = ['Jaggery Cardamom', 'Sugar Cardamom', 'Rose Tea', 'Jaggery Basundi'];
+
 		const swiper = new Swiper(el, {
 			modules: [Autoplay, Pagination, Navigation, EffectFade],
-			effect: 'fade',
+			effect: isMobile ? 'slide' : 'fade',
 			fadeEffect: { crossFade: true },
 			slidesPerView: 1,
+			spaceBetween: isMobile ? 0 : 0,
 			loop: true,
-			speed: 900,
+			speed: isMobile ? 500 : 900,
 			allowTouchMove: true,
 			autoplay: {
-				delay: 4000,
+				delay: 4500,
 				disableOnInteraction: false,
 				pauseOnMouseEnter: false,
 			},
@@ -122,8 +126,8 @@ import ProductImage from './ProductImage.astro';
 				el: '.home-hero-pagination',
 				clickable: true,
 				renderBullet: (index, className) => {
-					const names = ['Jaggery Cardamom', 'Sugar Cardamom', 'Rose Tea', 'Jaggery Basundi'];
-					return `<button type="button" class="${className} home-hero-dot" aria-label="${names[index] ?? 'Product'}">${names[index] ?? ''}</button>`;
+					const label = productNames[index] ?? 'Product';
+					return `<button type="button" class="${className} home-hero-dot" aria-label="${label}"><span class="home-hero-dot-label">${label}</span></button>`;
 				},
 			},
 			navigation: { nextEl: '.home-hero-next', prevEl: '.home-hero-prev' },
@@ -188,6 +192,17 @@ import ProductImage from './ProductImage.astro';
 	.home-hero-slide {
 		min-height: auto;
 		gap: 1rem;
+		width: 100%;
+	}
+
+	.home-hero-swiper {
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.home-hero-swiper :global(.swiper-wrapper),
+	.home-hero-swiper :global(.swiper-slide) {
+		width: 100%;
 	}
 
 	@media (min-width: 768px) {
@@ -215,8 +230,8 @@ import ProductImage from './ProductImage.astro';
 	.home-hero-image-frame {
 		width: 100%;
 		max-width: 100%;
-		height: min(220px, 34vh);
-		min-height: 180px;
+		height: min(260px, 38vh);
+		min-height: 200px;
 		margin: 0 auto;
 		display: flex;
 		align-items: center;
@@ -340,56 +355,21 @@ import ProductImage from './ProductImage.astro';
 		border-color: #c9a227;
 	}
 
-	.home-hero-swiper :global(.home-hero-dot) {
-		font-family: 'Poppins', sans-serif;
-		font-size: 10px;
-		font-weight: 500;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		padding: 8px 14px;
-		border: 1px solid rgba(201, 162, 39, 0.25);
-		background: transparent;
-		color: rgba(30, 30, 30, 0.55);
-		cursor: pointer;
-		transition: all 0.3s ease;
-		width: auto;
-		height: auto;
-		border-radius: 0;
-		opacity: 1;
+	@media (min-width: 1024px) {
+		.home-hero-controls {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+		}
 	}
 
-	.home-hero-swiper :global(.home-hero-dot.swiper-pagination-bullet-active) {
-		background: rgba(201, 162, 39, 0.15);
-		border-color: #c9a227;
-		color: #c9a227;
-	}
-
-	@media (max-width: 639px) {
-		.home-hero-brand p:last-child {
-			font-size: 0.72rem;
-			line-height: 1.5;
-		}
-
-		.home-hero-swiper :global(.home-hero-dot) {
-			font-size: 0;
-			width: 10px;
-			height: 10px;
-			min-width: 10px;
-			padding: 0;
-			border-radius: 50%;
-		}
-
-		.home-hero-swiper :global(.home-hero-dot.swiper-pagination-bullet-active) {
-			width: 28px;
-			border-radius: 999px;
-		}
-
-		.home-hero-pagination {
-			gap: 0.35rem !important;
-		}
-
+	@media (max-width: 767px) {
 		.home-hero-scroll {
-			display: none;
+			display: none !important;
+		}
+
+		.home-hero-brand {
+			margin-bottom: 1.25rem;
 		}
 	}
 </style>

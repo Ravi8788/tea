@@ -35,6 +35,97 @@
   .footer-logo {
     width: min(100%, 220px);
   }
+
+  /* Home hero slideshow — pagination injected by Swiper (unscoped) */
+  .home-hero-brand p:last-child {
+    font-size: 0.72rem;
+    line-height: 1.5;
+  }
+
+  .home-hero-dot-label {
+    display: none;
+  }
+
+  .home-hero-dot {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 162, 39, 0.45);
+    background: rgba(201, 162, 39, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 1;
+  }
+
+  .home-hero-dot.swiper-pagination-bullet-active {
+    width: 28px;
+    border-radius: 999px;
+    background: #c9a227;
+    border-color: #c9a227;
+  }
+
+  .home-hero-pagination {
+    gap: 0.4rem;
+  }
+
+  .home-hero-nav {
+    display: none;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 767px) {
+  .home-hero-dot-label {
+    display: none;
+  }
+
+  .home-hero-dot {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .home-hero-dot.swiper-pagination-bullet-active {
+    width: 28px;
+    border-radius: 999px;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-hero-dot-label {
+    display: inline;
+  }
+
+  .home-hero-dot {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    width: auto;
+    height: auto;
+    min-width: 0;
+    padding: 8px 14px;
+    border-radius: 0;
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    background: transparent;
+    color: rgba(30, 30, 30, 0.55);
+  }
+
+  .home-hero-dot.swiper-pagination-bullet-active {
+    width: auto;
+    border-radius: 0;
+    background: rgba(201, 162, 39, 0.15);
+    border-color: #c9a227;
+    color: #c9a227;
+  }
+
+  .home-hero-nav {
+    display: flex;
+  }
 }
 
 @media (max-width: 639px) {
