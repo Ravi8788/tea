@@ -383,11 +383,21 @@ Submit: `https://krushnaiamrutulya.com/sitemap.xml`
 ## Quick deploy cheat sheet
 
 ```bash
-# 1. Update src/data/company.ts if needed
-# 2. Build + verify
+# One command: build, verify, zip, upload checklist
+npm run hostinger:ready
+```
+
+This creates:
+- **`dist/`** — upload all contents to `public_html`
+- **`dist-hostinger.zip`** (~8 MB) — upload to hPanel File Manager and extract
+- **`dist/HOSTINGER-UPLOAD.txt`** — step-by-step checklist inside the build folder
+
+```bash
+# Build only (no zip)
 npm run build:hostinger
 
-# 3. Upload ALL files inside dist/ → Hostinger public_html
-# 4. Enable SSL in hPanel
-# 5. Test on phone + desktop: https://krushnaiamrutulya.com
+# Verify an existing dist/
+npm run verify:hostinger
 ```
+
+After upload: enable SSL in hPanel, then test on phone + desktop at `https://krushnaiamrutulya.com`

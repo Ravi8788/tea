@@ -13,10 +13,12 @@ const required = [
 	'.htaccess',
 	'robots.txt',
 	'sitemap.xml',
+	'site.webmanifest',
 	'404.html',
 	'about/index.html',
 	'contact/index.html',
 	'products/index.html',
+	'products/jaggery-cardamom/index.html',
 	'videos/advertisment.mp4',
 	'images/logo-header.png',
 ];
@@ -39,6 +41,7 @@ for (const file of required) {
 if (ok) {
 	console.log('Hostinger build OK — upload everything inside dist/ to public_html');
 	console.log(`  ${required.length} critical files verified`);
+	console.log('  Next: npm run package:hostinger  (creates dist-hostinger.zip)');
 } else {
 	process.exit(1);
 }

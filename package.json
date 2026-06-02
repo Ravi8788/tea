@@ -13,7 +13,8 @@
     "astro": "astro",
     "build:hostinger": "node scripts/generate-sitemap.mjs && astro build && node scripts/verify-hostinger-build.mjs",
     "verify:hostinger": "node scripts/verify-hostinger-build.mjs",
-    "package:hostinger": "npm run build:hostinger && powershell -NoProfile -Command \"if (Test-Path dist-hostinger.zip) { Remove-Item dist-hostinger.zip -Force }; Compress-Archive -Path 'dist/*' -DestinationPath 'dist-hostinger.zip'\""
+    "package:hostinger": "npm run build:hostinger && powershell -NoProfile -Command \"if (Test-Path dist-hostinger.zip) { Remove-Item dist-hostinger.zip -Force }; Compress-Archive -Path 'dist/*' -DestinationPath 'dist-hostinger.zip'\" && node scripts/hostinger-ready.mjs",
+    "hostinger:ready": "npm run package:hostinger"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
