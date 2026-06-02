@@ -23,13 +23,14 @@ export const seoPages = {
 	},
 	about: {
 		title: `About ${brand} | Heritage Jaggery Tea Premix Brand India`,
-		description: `Learn the story of ${brand} by ${company.name} — premium Rajasthani jaggery chai premix since 2023. FSSAI certified manufacturing in Sojat City, Pali, Rajasthan. Authentic taste, hygienic process, pan-India supply.`,
+		description: `Learn the story of ${brand} by ${company.founderName} and ${company.name} — premium Rajasthani jaggery chai premix since 2023. FSSAI certified manufacturing in Sojat City, Pali, Rajasthan. Call ${phone}.`,
 		keywords: [
 			`about ${brand}`,
 			'tea premix manufacturer Rajasthan',
 			'jaggery chai brand India',
 			'Shree Krishna Enterprises',
 			'Sojat City tea company',
+			'Vinod Bhanaram Parihar Krushnai Amrutulya',
 			'FSSAI certified tea premix',
 		].join(', '),
 	},

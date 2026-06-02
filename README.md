@@ -71,7 +71,7 @@ Edit **`src/data/company.ts`** (one file controls most business info):
 
 | Field | What to set |
 |-------|-------------|
-| `whatsappUrl` | WhatsApp link (e.g. `https://wa.me/918554857776`) |
+| `whatsappUrl` | WhatsApp link (e.g. `https://wa.me/917340411200`) |
 | `phone` | 10-digit mobile (no +91) |
 | `phoneDisplay` | How the number appears on site |
 | `email` | Business email |
@@ -254,7 +254,7 @@ Open these URLs:
 - [ ] Home: video plays below slideshow (muted)
 - [ ] Premium “Modern Businesses” section + Our Story timeline visible
 - [ ] Product carousel swipes on mobile
-- [ ] WhatsApp / Call links work (`+91 85548 57776`)
+- [ ] WhatsApp / Call links work (`+91 73404 11200`)
 - [ ] All pages open (`/about/`, `/products/`, `/contact/`)
 - [ ] `.htaccess` uploaded (show hidden files in File Manager)
 - [ ] HTTPS padlock active

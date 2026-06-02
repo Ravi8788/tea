@@ -27,7 +27,7 @@ const timeline = [
     year: '2022 – THE IDEA',
     title: 'A Vision Takes Shape',
     detail:
-      'Inspired by authentic Rajasthani tea traditions, Vinod Parihar began conceptualising a premium instant chai premix honouring the taste without sacrificing convenience.',
+      `Inspired by authentic Rajasthani tea traditions, ${company.founderName} began conceptualising a premium instant chai premix honouring the taste without sacrificing convenience.`,
   },
   {
     year: '2023 – LAUNCH',
@@ -233,7 +233,7 @@ const stats = [
               <div class="founder-image-frame overflow-hidden">
                 <img
                   src="/images/founder.png"
-                  alt="Vinod Parihar wearing traditional Rajasthani safa, holding Krushnai Amrutulya product boxes"
+                  alt={`${company.founderName} wearing traditional Rajasthani safa, holding Krushnai Amrutulya product boxes`}
                   class="founder-image-img"
                   width="800"
                   height="1000"
@@ -243,7 +243,7 @@ const stats = [
               </div>
             </div>
             <p class="founder-image-caption font-poppins font-medium text-xs text-center mt-4" style="color: #C9A227;">
-              Vinod Parihar — Founder & Managing Director
+              {company.founderName} — {company.founderTitle}
             </p>
           </div>
 
@@ -259,7 +259,7 @@ const stats = [
             <div class="about-intro-stagger space-y-6 font-poppins text-sm md:text-base font-normal" style="color: #1E1E1E; line-height: 1.75;">
               <p class="about-intro-para">
                 Krushnai Amrutulya is a premium tea premix brand under <span class="text-gold font-medium">Shree Krishna Enterprises</span>,
-                founded by <span class="text-gold font-medium">Vinod Parihar</span> in 2023 — with a singular vision to bring the authentic taste
+                founded by <span class="text-gold font-medium">{company.founderName}</span> in 2023 — with a singular vision to bring the authentic taste
                 of Rajasthani chai to every corner of India, with the convenience of a modern premix.
               </p>
               <p class="about-intro-para">
@@ -305,13 +305,13 @@ const stats = [
 
             <div class="space-y-7 font-poppins text-sm md:text-base font-normal" style="color: #1E1E1E; line-height: 1.75;">
               <p>
-                Every great brand begins with an honest memory. For Vinod Parihar, it was the memory
+                Every great brand begins with an honest memory. For {company.founderName}, it was the memory
                 of steaming glasses of chai served at roadside dhabas in Rajasthan — fragrant with
                 cardamom, bold with ginger, and sweetened just right — a daily ritual shared by millions.
               </p>
               <p>
                 As urbanisation accelerated and lifestyles became busier, that ritual was at risk.
-                The artisanal knowledge of perfectly spiced chai was being lost to convenience. Vinod
+                The artisanal knowledge of perfectly spiced chai was being lost to convenience. {company.founderName.split(' ')[0]}
                 saw not a problem, but an opportunity: to preserve authenticity while making it accessible
                 to everyone, everywhere, instantly.
               </p>
@@ -383,15 +383,15 @@ const stats = [
           <div class="w-12 h-px mx-auto mb-6" style="background: #C9A227;"></div>
           <img
             src="/images/founder-avatar.jpg"
-            alt="Vinod Parihar"
+            alt={company.founderName}
             class="founder-avatar mx-auto mb-4"
             width="144"
             height="144"
             loading="lazy"
           />
-          <p class="font-cinzel font-semibold text-lg" style="color: #C9A227;">Vinod Parihar</p>
+          <p class="font-cinzel font-semibold text-lg" style="color: #C9A227;">{company.founderName}</p>
           <p class="font-poppins text-[13px] italic mt-2 text-dark/60">
-            Founder & Managing Director, Shree Krishna Enterprises
+            {company.founderTitle}, {company.name}
           </p>
         </footer>
 

@@ -1,4 +1,6 @@
 ---
+import { company } from '../data/company';
+
 const timeline = [
   {
     year: '2023',
@@ -63,7 +65,7 @@ const timeline = [
         <div class="relative overflow-hidden founder-heritage-frame" style="aspect-ratio: 4/5;">
           <img
             src="/images/founder.png"
-            alt="Vinod Parihar, Founder of Krushnai Amrutulya — premium jaggery tea premix from Rajasthan"
+            alt={`${company.founderName}, Founder of Krushnai Amrutulya — premium jaggery tea premix from Rajasthan`}
             class="h-full w-full object-cover"
             style="object-position: center top;"
             width="600"

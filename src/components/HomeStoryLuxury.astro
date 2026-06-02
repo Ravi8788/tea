@@ -1,4 +1,6 @@
 ---
+import { company } from '../data/company';
+
 const storyPoints = [
   'Authentic Rajasthani chai profile with modern premix convenience.',
   'Crafted under strict hygiene and FSSAI-certified quality standards.',
@@ -21,7 +23,7 @@ const storyPoints = [
         <div class="home-story-divider mb-6"></div>
         <div class="space-y-4 font-poppins text-sm md:text-base leading-relaxed text-dark/75">
           <p>
-            Krushnai Amrutulya was founded by Vinod Parihar in Rajasthan with one vision:
+            Krushnai Amrutulya was founded by {company.founderName} in Rajasthan with one vision:
             preserve the soul of traditional chai and deliver that same rich taste in a premium, reliable premix.
           </p>
           <p>
@@ -47,7 +49,7 @@ const storyPoints = [
           <div class="home-story-image-frame">
             <img
               src="/images/founder.png"
-              alt="Vinod Parihar, Founder of Krushnai Amrutulya"
+              alt={`${company.founderName}, Founder of Krushnai Amrutulya`}
               class="home-story-image"
               width="760"
               height="950"

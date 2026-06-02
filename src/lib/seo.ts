@@ -44,6 +44,11 @@ export function organizationSchema() {
 		email: company.email,
 		telephone: company.phoneDisplay,
 		foundingDate: '2023',
+		founder: {
+			'@type': 'Person',
+			name: company.founderName,
+			jobTitle: company.founderTitle,
+		},
 		knowsAbout: [
 			'Jaggery tea premix',
 			'Instant chai premix',
@@ -83,6 +88,11 @@ export function localBusinessSchema() {
 		priceRange: '₹₹',
 		currenciesAccepted: 'INR',
 		paymentAccepted: 'Cash, UPI, Bank Transfer',
+		founder: {
+			'@type': 'Person',
+			name: company.founderName,
+			jobTitle: company.founderTitle,
+		},
 		address: {
 			'@type': 'PostalAddress',
 			streetAddress: `${company.address.line1}, ${company.address.line2}`,
@@ -170,7 +180,7 @@ export const homeFaqItems = [
 	{
 		question: 'What is Krushnai Amrutulya tea premix?',
 		answer:
-			'Krushnai Amrutulya is a premium FSSAI certified jaggery tea premix brand manufactured by Shree Krishna Enterprises in Sojat City, Pali, Rajasthan. Our blends deliver authentic Rajasthani chai taste with instant preparation.',
+			`Krushnai Amrutulya is a premium FSSAI certified jaggery tea premix brand founded by ${company.founderName} and manufactured by Shree Krishna Enterprises in Sojat City, Pali, Rajasthan. Our blends deliver authentic Rajasthani chai taste with instant preparation.`,
 	},
 	{
 		question: 'Do you supply tea premix in bulk for hotels and restaurants?',
