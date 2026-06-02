@@ -3,14 +3,10 @@ export const company = {
 	brand: 'Krushnai Amrutulya',
 	siteUrl: 'https://krushnaiamrutulya.com',
 	fssaiLicense: '12225036000072',
-	/** Replace with real 10-digit mobile (no +91 prefix in value) before launch */
-	phone: '9876543210',
-	phoneDisplay: '+91 98765 43210',
+	phone: '8554857776',
+	phoneDisplay: '+91 85548 57776',
 	email: 'info@krushnaiamrutulya.com',
-	/** Replace XXXXXXXXXX with real number before launch — e.g. 919876543210 */
-	whatsappUrl: 'https://wa.me/91XXXXXXXXXX',
-	/** Create a free form at https://formspree.io and paste your form ID here */
-	contactFormAction: 'https://formspree.io/f/xplaceholder',
+	whatsappUrl: 'https://wa.me/918554857776',
 	logoPath: '/images/logo.png',
 	logoHeaderPath: '/images/logo-header.png',
 	productImageFallbackBg: 'transparent',

@@ -41,43 +41,7 @@ const addressLines = companyAddressFormatted.split('\n');
 
     <section class="section-py section-light">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-
-          <!-- Contact Form -->
-          <div class="reveal">
-            <h2 class="font-cinzel font-bold text-dark text-xl mb-2">Send a Message</h2>
-            <p class="font-poppins text-dark/55 text-sm mb-8">We respond within 24 hours on business days.</p>
-            <form class="space-y-5" action={company.contactFormAction} method="POST">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label for="name" class="label-text text-gold/70 mb-2 block">Full Name *</label>
-                  <input type="text" id="name" name="name" required class="form-input" />
-                </div>
-                <div>
-                  <label for="phone" class="label-text text-gold/70 mb-2 block">Phone *</label>
-                  <input type="tel" id="phone" name="phone" required class="form-input" />
-                </div>
-              </div>
-              <div>
-                <label for="email" class="label-text text-gold/70 mb-2 block">Email *</label>
-                <input type="email" id="email" name="email" required class="form-input" />
-              </div>
-              <div>
-                <label for="subject" class="label-text text-gold/70 mb-2 block">Subject</label>
-                <select id="subject" name="subject" class="form-input">
-                  <option value="bulk">Bulk Order Enquiry</option>
-                  <option value="dealer">Dealer Partnership</option>
-                  <option value="product">Product Information</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div>
-                <label for="message" class="label-text text-gold/70 mb-2 block">Message *</label>
-                <textarea id="message" name="message" rows="5" required class="form-input resize-none"></textarea>
-              </div>
-              <button type="submit" class="btn-gold text-xs px-10 py-4">Send Message →</button>
-            </form>
-          </div>
+        <div class="grid grid-cols-1 gap-16">
 
           <!-- Contact Info + Map -->
           <div class="reveal-right space-y-8">
