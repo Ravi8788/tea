@@ -2,6 +2,8 @@
 
 Luxury static website for **Krushnai Amrutulya** (Shree Krishna Enterprises) — premium jaggery tea premix from Rajasthan, India.
 
+**Full project reference (tech stack, business info, SEO, deployment):** [docs/PROJECT-REFERENCE.md](docs/PROJECT-REFERENCE.md)
+
 **Production domain:** [https://krushnaiamrutulya.com](https://krushnaiamrutulya.com)  
 **Hosting:** Hostinger shared hosting (Apache, static files)  
 **Mobile-first:** Native scroll on phones, lighter animations, autoplay hero video + slideshow tested for mobile.
